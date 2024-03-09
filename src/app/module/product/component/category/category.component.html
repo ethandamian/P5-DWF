@@ -1,0 +1,38 @@
+<body class="bg-dark">
+    <nav>
+        <div class="color-blue">
+            <span class="navbar mb-0 h1 text-black text-bav">Store</span>
+        </div>
+    </nav>
+    <div class="card-container">
+        <div class="card bg-dark">
+            <div class="card-header">
+                <h3 class="text-center"><strong>Categories</strong></h3>
+            </div>
+            <div class="card-body">
+
+
+                <table class="table">
+                    <thead>
+                        <tr class="text-white">
+                            <th scope="col">Category_id</th>
+                            <th scope="col">Acronym</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let item of categories">
+                        <tr class="table-default text-white">
+                            <td>{{item.category_id}}</td>
+                            <td>{{item.category}}</td>
+                            <td>{{item.acronym}}</td>
+                            <td>{{item.status}}</td>
+                        <tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+</body>
