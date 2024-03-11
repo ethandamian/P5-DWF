@@ -1,7 +1,8 @@
 <body class="bg-dark">
     <nav>
-        <div class="color-blue">
-            <span class="navbar mb-0 h1 text-black text-bav">Store</span>
+        <div class="span-container color-blue">
+            <span class="navbar-text mb-0 h1 text-black text-bav">
+                MangaWorld</span>
         </div>
     </nav>
     <div class="card-container">
@@ -12,7 +13,7 @@
             <div class="card-body">
 
 
-                <table class="table">
+                <table class="table table-striped">
                     <thead>
                         <tr class="text-white">
                             <th scope="col">Category_id</th>
@@ -21,13 +22,16 @@
                             <th scope="col">Status</th>
                         </tr>
                     </thead>
-                    <tbody *ngFor="let item of categories">
+                    <!-- <tbody *ngFor="let item of categories"> -->
+                    <tbody>
+                        @for (item of categories; track item){
                         <tr class="table-default text-white">
                             <td>{{item.category_id}}</td>
                             <td>{{item.category}}</td>
                             <td>{{item.acronym}}</td>
                             <td>{{item.status}}</td>
                         <tr>
+                            }
                     </tbody>
                 </table>
 

@@ -1,3 +1,11 @@
+.span-container {
+    padding: 1rem 0 1rem 1rem;
+}
+
+.navbar-text {
+    font-weight: bold;
+}
+
 .card-container {
     display: flex;
     align-items: center;

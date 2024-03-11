@@ -10,11 +10,11 @@ export class CategoryService {
   constructor() { }
   getCategories(): Category[] {
     let categories: Category[] = [
-      new Category(1, "Technology", "TECH", "Active"),
-      new Category(2, "Literature", "LIT", "Inactive"),
-      new Category(3, "Food & Beverage", "FOOD", "Active"),
-      new Category(4, "Fashion", "FASH", "Active"),
-      new Category(5, "Health & Wellness", "HEALTH", "Inactive"),
+      new Category(1, "Shonen", "SHN", "Active"),
+      new Category(2, "Shojo", "SHJ", "Inactive"),
+      new Category(3, "Josei", "JSI", "Active"),
+      new Category(4, "Isekai", "ISK", "Active"),
+      new Category(5, "Comics", "CMCS", "Inactive"),
     ];
 
     return categories;
