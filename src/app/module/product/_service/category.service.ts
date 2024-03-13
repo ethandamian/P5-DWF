@@ -15,6 +15,11 @@ export class CategoryService {
       new Category(3, "Josei", "JSI", "Active"),
       new Category(4, "Isekai", "ISK", "Active"),
       new Category(5, "Comics", "CMCS", "Inactive"),
+      new Category(6, "Kodomo", "KDM", "Active"),
+      new Category(7, "Seinen", "SNN", "Active"),
+      new Category(8, "Mecha", "MCH", "Inactive"),
+      new Category(9, "Mahou Shojo", "MHS", "Active"),
+      new Category(10, "Spokon", "SPK", "Inactive"),
     ];
 
     return categories;
