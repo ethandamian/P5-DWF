@@ -81,7 +81,8 @@ export class CategoryComponent {
 
   showModal() {
     $('#categoryFormModal').modal("show");
-
+    this.form.reset();
+    this.submitted = false;
   }
 
   hideModal() {

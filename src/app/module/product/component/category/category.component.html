@@ -48,23 +48,33 @@
     </div>
     <div class="modal fade" id="categoryFormModal" tabindex="-1" data-bs-backdrop="static">
         <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
+            <div class="modal-content size-body">
                 <div class="modal-header">
                     <h5 class="modal-title">New Category</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()" id="fm">
+                        
                         <div class="mb-3">
                             <label for="category" class="form-label">Category</label>
                             <input type="text" class="form-control" id="category" formControlName="category"
-                                placeholder="Category Name">
+                                placeholder="Category Name" [ngClass]= "{'is-invalid': form.controls['category'].errors && submitted}" >
+
+                            @if (form.controls['category'].errors && submitted){
+                                <small class="input-error-message">Please  enter a valid category.</small>
+                            }
+
                         </div>
                         <div class="mb-3">
                             <label for="acronym" class="form-label">Acronym</label>
                             <input type="text" class="form-control" id="acronym" formControlName="acronym"
-                                placeholder="Category Acronym">
+                                placeholder="Category Acronym" [ngClass]= "{'is-invalid': form.controls['acronym'].errors && submitted}" >
+
+                            @if (form.controls['acronym'].errors && submitted){
+                                <small class="input-error-message">Please  enter a valid acronym.</small>
+                            }
+
                         </div>
                         <div class="form-button">
                             <button type="submit" class="btn modal-btn btn-primary btn-new">Agregar</button>

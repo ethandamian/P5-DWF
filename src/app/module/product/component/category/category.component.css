@@ -74,5 +74,22 @@
 .modal-btn {
     width: 150px;
     margin-top: 1rem;
+    padding: auto;
     background: #6c35de;
+}
+
+.input-error-message{
+    color: red;
+}
+
+.btn-new{
+    width: 240px;
+}
+
+.form-button{
+    text-align: center;
+}
+
+.size-body{
+    height: fit-content;
 }
