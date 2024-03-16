@@ -1,16 +1,22 @@
-<body class="bg-dark">
+<section class="bg-dark">
     <nav>
         <div class="span-container color-blue">
-            <span class="navbar-text mb-0 h1 text-black text-bav">
+            <span class="navbar-text mb-0 h1 text-bav">
                 MangaWorld</span>
+
         </div>
+
     </nav>
     <div class="card-container">
         <div class="card bg-dark">
             <div class="card-header">
-                <h3 class="text-center"><strong>Categories</strong></h3>
+                <div class="header-container">
+                    <h3 class="text-center"><strong>Categories</strong></h3>
+
+                </div>
+                <button type="button" class="btn new-category-btn btn-dark" (click)="showModal()">New Category</button>
             </div>
-            <div class="card-body">
+            <div class=" card-body">
 
 
                 <table class="table table-striped">
@@ -29,14 +35,45 @@
                             <td>{{item.category_id}}</td>
                             <td>{{item.category}}</td>
                             <td>{{item.acronym}}</td>
-                            <td>{{item.status}}</td>
+                            <td>{{item.status == 1 ? "Active" : "Inactive"}}</td>
                         <tr>
                             }
                     </tbody>
                 </table>
 
 
+
             </div>
         </div>
     </div>
-</body>
+    <div class="modal fade" id="categoryFormModal" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New Category</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Category</label>
+                            <input type="text" class="form-control" id="category" formControlName="category"
+                                placeholder="Category Name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="acronym" class="form-label">Acronym</label>
+                            <input type="text" class="form-control" id="acronym" formControlName="acronym"
+                                placeholder="Category Acronym">
+                        </div>
+                        <div class="form-button">
+                            <button type="submit" class="btn modal-btn btn-primary btn-new">Agregar</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>

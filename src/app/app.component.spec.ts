@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'P5-DWF'`, () => {
+  it(`should have as title 'Manga World'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('P5-DWF');
+    expect(app.title).toEqual('Manga World');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, P5-DWF');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, Manga World!');
   });
 });
