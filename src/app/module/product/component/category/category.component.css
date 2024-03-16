@@ -34,9 +34,10 @@
     align-items: center;
 }
 
-.new-category-btn {
-    position: absolute;
-    margin-left: 60rem;
+
+.align-button{
+    position:absolute;
+    right: 30px;
 }
 
 .header-container {
