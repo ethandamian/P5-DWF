@@ -33,11 +33,26 @@ export class CategoryComponent {
   }
 
   ngOnInit() {
-    this.categories = this.getCategories();
+    this.getCategories();
   }
 
   getCategories() {
-    return this.categoryService.getCategories();
+    this.categoryService.getCategories().subscribe({
+      next: (response) => {
+        this.categories = response.body!;
+      },
+      error: (e) => {
+        Swal.fire({
+          title: 'Error creating category',
+          text: e.error!.message,
+          icon: 'error',
+          showConfirmButton: true,
+          background: '#4d425f',
+          color: 'white'
+        });
+      }
+
+    })
 
   }
 
@@ -75,7 +90,7 @@ export class CategoryComponent {
       toast: true,
       background: '#4d425f',
       color: 'white'
-    })
+    });
 
   }
 
