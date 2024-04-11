@@ -35,8 +35,8 @@
 }
 
 
-.align-button{
-    position:absolute;
+.align-button {
+    position: absolute;
     right: 30px;
 }
 
@@ -79,18 +79,68 @@
     background: #6c35de;
 }
 
-.input-error-message{
+.input-error-message {
     color: red;
 }
 
-.btn-new{
+.btn-new {
     width: 240px;
 }
 
-.form-button{
+.form-button {
     text-align: center;
 }
 
-.size-body{
+.size-body {
     height: fit-content;
+}
+
+/* ul dropdown  */
+
+.icon-menu {
+    color: white;
+}
+
+.dropdown-button {
+    border: none;
+    background-color: #202020;
+}
+
+
+.dropdown-item {
+    color: white !important;
+    cursor: pointer;
+}
+
+
+.dropdown-item:hover {
+    color: rgb(255, 255, 255) !important;
+}
+
+
+.enable-item {
+    color: rgb(132, 0, 255) !important;
+    cursor: pointer;
+}
+
+
+.enable-item:hover {
+    color: white !important;
+}
+
+
+.disable-item {
+    color: red !important;
+    cursor: pointer;
+}
+
+
+.disable-item:hover {
+    color: white !important;
+}
+
+
+.icon-text-ul {
+    font-size: 14px;
+    margin-right: 8px;
 }
