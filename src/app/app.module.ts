@@ -6,6 +6,12 @@ import { AppComponent } from './app.component';
 import { ProductModule } from './module/product/product.module';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { jwtInterceptorInterceptor } from './core/jwt-interceptor.interceptor';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { AuthenticationModule } from './module/authentication/authentication.module';
+import { CommonsModule } from './module/commons/commons.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +20,9 @@ import { jwtInterceptorInterceptor } from './core/jwt-interceptor.interceptor';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ProductModule
+    ProductModule,
+    AuthenticationModule,
+    CommonsModule
   ],
   providers: [provideHttpClient(withInterceptors([jwtInterceptorInterceptor]))],
   bootstrap: [AppComponent],
