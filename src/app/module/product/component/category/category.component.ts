@@ -70,6 +70,7 @@ export class CategoryComponent {
       title: 'Favor de confirmar la activación de la category',
       icon: 'warning',
       showCancelButton: true,
+      showConfirmButton: true,
       cancelButtonText: 'Cancelar',
       confirmButtonText: 'Confirmar',
     }).then((result: any) => {
@@ -161,7 +162,8 @@ export class CategoryComponent {
     this.form.controls['acronym'].setValue(category.acronym);
 
     this.submitted = false;
-    $("#modalForm").modal("show");
+    $("#categoryFormModal").modal("show");
+    $("#category-form-title").text("Update Category");
   }
 
   showNewCategoryAlert() {
@@ -182,6 +184,7 @@ export class CategoryComponent {
 
   showModal() {
     $('#categoryFormModal').modal("show");
+    $("#category-form-title").text("New Category");
     this.form.reset();
     this.submitted = false;
     this.categoryToUpdate = 0;

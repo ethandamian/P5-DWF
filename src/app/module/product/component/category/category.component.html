@@ -43,7 +43,12 @@
                             <td>{{category.category_id}}</td>
                             <td>{{category.category}}</td>
                             <td>{{category.acronym}}</td>
-                            <td>{{category.status == 1 ? "Active" : "Inactive"}}</td>
+                            <td>
+                                <div class="td-status"
+                                    [ngClass]="{'td-status-enable': category.status == 1, 'td-status-disable': category.status == 0}">
+                                    {{category.status == 1 ? "Active" : "Inactive"}}
+                                </div>
+                            </td>
                             <td>
                                 <div class="dropdown">
                                     <!-- dots button  -->
@@ -83,7 +88,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content size-body">
                 <div class="modal-header">
-                    <h5 class="modal-title">New Category</h5>
+                    <h5 class="modal-title" id="category-form-title"></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -112,7 +117,7 @@
 
                         </div>
                         <div class="form-button">
-                            <button type="submit" class="btn modal-btn btn-primary btn-new">Agregar</button>
+                            <button type="submit" class="btn modal-btn btn-primary btn-new">Add</button>
                         </div>
                     </form>
                 </div>
