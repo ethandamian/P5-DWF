@@ -43,21 +43,21 @@ export class CategoryComponent {
 
   disableCategory(id: number) {
     this.swal.confirmMessage.fire({
-      title: 'Favor de confirmar la activación de la categoría',
+      title: 'Please confirm the deactivation of the category',
       icon: 'warning',
       showCancelButton: true,
-      cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Confirm',
     }).then((result: any) => {
       if (result.isConfirmed) {
         this.categoryService.disableCategory(id).subscribe({
           next: (v) => {
-            this.swal.successMessage(v.body!.message); // show message
+            this.swal.successMessage("The caregory has been disabled"); // show message
             this.getCategories(); // reload regions
           },
           error: (e) => {
             console.error(e);
-            this.swal.errorMessage(e.error!.message); // show message
+            this.swal.errorMessage("Can't disable category if it has active products"); // show message
           }
         });
       }
@@ -67,12 +67,12 @@ export class CategoryComponent {
 
   enableCategory(id: number) {
     this.swal.confirmMessage.fire({
-      title: 'Favor de confirmar la activación de la category',
+      title: 'Please confirm the activation of the category',
       icon: 'warning',
       showCancelButton: true,
       showConfirmButton: true,
-      cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Confirm',
     }).then((result: any) => {
       if (result.isConfirmed) {
         this.categoryService.enableCategory(id).subscribe({
@@ -128,13 +128,13 @@ export class CategoryComponent {
   onSubmitCreate() {
     this.categoryService.createCategory(this.form.value).subscribe({
       next: (v) => {
-        this.swal.successMessage(v.body!.message); // show message
+        this.swal.successMessage("The category has been added successfully!"); // show message
         this.getCategories(); // reload regions
         this.hideModal(); // close modal
       },
       error: (e) => {
         console.error(e);
-        this.swal.errorMessage(e.error!.message); // show message
+        this.swal.errorMessage("Error, the category can't be created, try again"); // show message
       }
     });
   }
@@ -142,14 +142,14 @@ export class CategoryComponent {
     // add region to region list
     this.categoryService.updateCategory(this.form.value, this.categoryToUpdate).subscribe({
       next: (v) => {
-        this.swal.successMessage(v.body!.message); // show message
+        this.swal.successMessage("The categody has been updated succesfully!"); // show message
         this.getCategories(); // reload regions
         this.hideModal(); // close modal
         this.categoryToUpdate = 0; // reset regionToUpdate
       },
       error: (e) => {
         console.error(e);
-        this.swal.errorMessage(e.error!.message); // show message
+        this.swal.errorMessage("Error, the category can't be updated, please try again"); // show message
       }
     });
   }
@@ -164,6 +164,7 @@ export class CategoryComponent {
     this.submitted = false;
     $("#categoryFormModal").modal("show");
     $("#category-form-title").text("Update Category");
+    $("#button-modal").text("Update");
   }
 
   showNewCategoryAlert() {
@@ -185,6 +186,7 @@ export class CategoryComponent {
   showModal() {
     $('#categoryFormModal').modal("show");
     $("#category-form-title").text("New Category");
+    $("#button-modal").text("Add");
     this.form.reset();
     this.submitted = false;
     this.categoryToUpdate = 0;
