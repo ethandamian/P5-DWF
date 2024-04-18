@@ -96,7 +96,7 @@ export class CategoryComponent {
       },
       error: (e) => {
         Swal.fire({
-          title: 'Error creating category',
+          title: 'Error connecting to the server',
           text: e.error!.message,
           icon: 'error',
           showConfirmButton: true,
