@@ -164,7 +164,7 @@ export class CategoryComponent {
     this.submitted = false;
     $("#categoryFormModal").modal("show");
     $("#category-form-title").text("Update Category");
-    $("#button-modal").text("Update");
+    $("#modal-button").text("Update");
   }
 
   showNewCategoryAlert() {
@@ -186,7 +186,7 @@ export class CategoryComponent {
   showModal() {
     $('#categoryFormModal').modal("show");
     $("#category-form-title").text("New Category");
-    $("#button-modal").text("Add");
+    $("#modal-button").text("Add");
     this.form.reset();
     this.submitted = false;
     this.categoryToUpdate = 0;
