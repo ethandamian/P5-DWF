@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Category } from '../_model/category';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { api_dwb_uri } from '../../../shared/uri/api-dwb-uri';
+import { ApiResponse } from '../../commons/_dto/api-response';
 
 
 @Injectable({
@@ -7,21 +11,42 @@ import { Category } from '../_model/category';
 })
 export class CategoryService {
 
-  constructor() { }
-  getCategories(): Category[] {
-    let categories: Category[] = [
-      new Category(1, "Shonen", "SHN", "Active"),
-      new Category(2, "Shojo", "SHJ", "Inactive"),
-      new Category(3, "Josei", "JSI", "Active"),
-      new Category(4, "Isekai", "ISK", "Active"),
-      new Category(5, "Comics", "CMCS", "Inactive"),
-      new Category(6, "Kodomo", "KDM", "Active"),
-      new Category(7, "Seinen", "SNN", "Active"),
-      new Category(8, "Mecha", "MCH", "Inactive"),
-      new Category(9, "Mahou Shojo", "MHS", "Active"),
-      new Category(10, "Spokon", "SPK", "Inactive"),
-    ];
+  private source = '/category'
 
-    return categories;
+  constructor(private http: HttpClient) { }
+
+  createCategory(category: any): Observable<HttpResponse<ApiResponse>> {
+    return this.http.post<ApiResponse>(api_dwb_uri + this.source, category, { observe: 'response' });
+
   }
+
+  disableCategory(id: number): Observable<HttpResponse<ApiResponse>> {
+    return this.http.delete<ApiResponse>(api_dwb_uri + this.source + '/' + id, { observe: 'response' });
+
+  }
+
+  enableCategory(id: number): Observable<HttpResponse<ApiResponse>> {
+    return this.http.put<ApiResponse>(api_dwb_uri + this.source + '/' + id + "/activate", null, { observe: 'response' });
+  }
+
+  getCategory(id: number): Observable<HttpResponse<Category>> {
+    return this.http.get<Category>(api_dwb_uri + this.source + "/" + id, { observe: 'response' });
+
+
+  }
+
+  getCategories(): Observable<HttpResponse<Category[]>> {
+
+    return this.http.get<Category[]>(api_dwb_uri + this.source, { observe: 'response' });
+  }
+
+  getActiveCategories(): Observable<HttpResponse<Category[]>> {
+    return this.http.get<Category[]>(api_dwb_uri + this.source + "/active", { observe: 'response' });
+  }
+
+  updateCategory(category: any, id: number): Observable<HttpResponse<ApiResponse>> {
+    return this.http.put<ApiResponse>(api_dwb_uri + this.source + "/" + id, category, { observe: 'response' });
+  }
+
+
 }

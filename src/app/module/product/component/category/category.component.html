@@ -1,12 +1,4 @@
 <section class="bg-dark">
-    <nav>
-        <div class="span-container color-blue">
-            <span class="navbar-text mb-0 h1 text-bav">
-                MangaWorld</span>
-
-        </div>
-
-    </nav>
     <div class="card-container">
         <div class="card bg-dark">
             <div class="card-header clearfix">
@@ -14,8 +6,13 @@
                     <h3 class="text-center"><strong>Categories</strong></h3>
 
                 </div>
-                <div class = "align-button">
-                    <button type="button" class="btn btn-dark" (click)="showModal()">New Category</button>
+                <div class="align-button">
+
+                    <button type="button" class="btn btn-dark" (click)="showModal()">
+                        <i class="ph ph-plus"></i>
+                        New
+
+                    </button>
                 </div>
             </div>
             <div class=" card-body">
@@ -28,16 +25,47 @@
                             <th scope="col">Acronym</th>
                             <th scope="col">Category</th>
                             <th scope="col">Status</th>
+                            <th scope="col">More</th>
                         </tr>
                     </thead>
                     <!-- <tbody *ngFor="let item of categories"> -->
                     <tbody>
-                        @for (item of categories; track item){
+                        @for (category of categories; track category){
                         <tr class="table-default text-white">
-                            <td>{{item.category_id}}</td>
-                            <td>{{item.category}}</td>
-                            <td>{{item.acronym}}</td>
-                            <td>{{item.status == 1 ? "Active" : "Inactive"}}</td>
+                            <td>{{category.category_id}}</td>
+                            <td>{{category.category}}</td>
+                            <td>{{category.acronym}}</td>
+                            <td>
+                                <div class="td-status"
+                                    [ngClass]="{'td-status-enable': category.status == 1, 'td-status-disable': category.status == 0}">
+                                    {{category.status == 1 ? "Active" : "Inactive"}}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <!-- dots button  -->
+                                    <button class="dropdown-button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
+                                    </button>
+
+
+                                    <!-- menu options -->
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" (click)="updateCategory(category)">
+                                            <i class="ph ph-note-pencil icon-text-ul"></i>Edit
+                                        </a>
+                                        <a *ngIf="category.status == 0" class="dropdown-item enable-item"
+                                            (click)="enableCategory(category.category_id)">
+                                            <i class="ph ph-check-circle icon-text-ul"></i>Activate
+                                        </a>
+                                        <a *ngIf="category.status == 1" class="dropdown-item disable-item"
+                                            (click)="disableCategory(category.category_id)">
+                                            <i class="ph ph-x-circle icon-text-ul"></i>Disable
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
                         <tr>
                             }
                     </tbody>
@@ -52,34 +80,36 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content size-body">
                 <div class="modal-header">
-                    <h5 class="modal-title">New Category</h5>
+                    <h5 class="modal-title" id="category-form-title"></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form [formGroup]="form" (ngSubmit)="onSubmit()" id="fm">
-                        
+
                         <div class="mb-3">
                             <label for="category" class="form-label">Category</label>
                             <input type="text" class="form-control" id="category" formControlName="category"
-                                placeholder="Category Name" [ngClass]= "{'is-invalid': form.controls['category'].errors && submitted}" >
+                                placeholder="Category Name"
+                                [ngClass]="{'is-invalid': form.controls['category'].errors && submitted}">
 
                             @if (form.controls['category'].errors && submitted){
-                                <small class="input-error-message">Please  enter a valid category.</small>
+                            <small class="input-error-message">Please enter a valid category.</small>
                             }
 
                         </div>
                         <div class="mb-3">
                             <label for="acronym" class="form-label">Acronym</label>
                             <input type="text" class="form-control" id="acronym" formControlName="acronym"
-                                placeholder="Category Acronym" [ngClass]= "{'is-invalid': form.controls['acronym'].errors && submitted}" >
+                                placeholder="Category Acronym"
+                                [ngClass]="{'is-invalid': form.controls['acronym'].errors && submitted}">
 
                             @if (form.controls['acronym'].errors && submitted){
-                                <small class="input-error-message">Please  enter a valid acronym.</small>
+                            <small class="input-error-message">Please enter a valid acronym.</small>
                             }
 
                         </div>
                         <div class="form-button">
-                            <button type="submit" class="btn modal-btn btn-primary btn-new">Agregar</button>
+                            <button type="submit" class="btn modal-btn btn-primary btn-new" id="modal-button"></button>
                         </div>
                     </form>
                 </div>
