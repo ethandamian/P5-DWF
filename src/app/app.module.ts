@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProductModule } from './module/product/product.module';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { jwtInterceptorInterceptor } from './core/jwt-interceptor.interceptor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -21,7 +20,6 @@ import { NavbarComponent } from './module/layout/app-layout/navbar/navbar.compon
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ProductModule,
     AuthenticationModule,
     CommonsModule
   ],
