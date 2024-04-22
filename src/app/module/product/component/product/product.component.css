@@ -1,0 +1,164 @@
+.span-container {
+    padding: 1rem 0 1rem 1rem;
+    background: #a364ff;
+
+}
+
+
+
+.navbar-text {
+    font-weight: bold;
+}
+
+.card-container {
+    display: flex;
+    align-items: center;
+    height: 90vh;
+    background: #241b35;
+}
+
+.card {
+    padding: 20px;
+    margin-top: 20px;
+    max-width: 1280px;
+    margin: auto;
+    width: 100%;
+}
+
+.card-header {
+    background-color: #a364ff;
+    padding: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.align-button {
+    position: absolute;
+    right: 30px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    /* Ajusta el ancho máximo según sea necesario */
+}
+
+.color-blue {
+    background-color: #9889f0;
+}
+
+.modal-dialog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 60px);
+
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 600px;
+    height: 340px;
+    margin: auto;
+}
+
+/* .modal-footer {
+    height: 60px;
+} */
+
+.modal-btn {
+    width: 150px;
+    margin-top: 1rem;
+    padding: auto;
+    background: #6c35de;
+}
+
+.input-error-message {
+    color: red;
+}
+
+.btn-new {
+    width: 240px;
+}
+
+.form-button {
+    text-align: center;
+}
+
+.size-body {
+    height: fit-content;
+}
+
+/* ul dropdown  */
+
+.icon-menu {
+    color: white;
+}
+
+.dropdown-button {
+    border: none;
+    background-color: #202020;
+}
+
+
+.dropdown-item {
+    color: white !important;
+    cursor: pointer;
+}
+
+
+.dropdown-item:hover {
+    color: rgb(255, 255, 255) !important;
+}
+
+
+.enable-item {
+    color: rgb(0, 119, 255) !important;
+    cursor: pointer;
+}
+
+
+.enable-item:hover {
+    color: white !important;
+}
+
+
+.disable-item {
+    color: red !important;
+    cursor: pointer;
+}
+
+
+.disable-item:hover {
+    color: white !important;
+}
+
+
+.icon-text-ul {
+    font-size: 14px;
+    margin-right: 8px;
+}
+
+.td-status {
+    position: absolute;
+    width: 100px;
+    text-align: center;
+    border-radius: 8px;
+    color: white;
+}
+
+
+.td-status-enable {
+    background-color: #3498db;
+}
+
+
+.td-status-disable {
+    background-color: #e74c3c;
+}

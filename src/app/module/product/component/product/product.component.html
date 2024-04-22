@@ -1,192 +1,194 @@
-<div class="card border-light mb-3">
+<section class="bg-dark">
+  <div class="card-container">
+    <div class="card bg-dark">
 
-    <!-- Card header -->
+      <!-- Card header -->
 
-    <div class="card-header">
-      <div class="row">
-          <div class="col">
-            <h4>Listado de productos</h4>
-          </div>
-          <div class="col">
-            <button type="button" class="btn btn-primary" style="float: right;" (click)="showModalForm()">
-              <i class="ph ph-plus-circle"></i>
-              Agregar producto
-            </button>
-          </div>
-      </div>
-    </div>
-
-    <!-- Card body -->
-
-    <div class="card-body">
-
-        <!-- Region table  -->
-
-        <table class="table">
-            <thead class="thead-dark">
-              <tr class="table-primary">
-                  <th>Id</th>
-                  <th>Gtin</th>
-                  <th>Producto</th>
-                  <th>Precio</th>
-                  <th>Estatus</th>
-                  <th>Más</th>
-              </tr>
-            </thead>
-            <tbody>
-                @for(product of products; track product; let i = $index ) {
-                    <tr>
-                        <td>{{ i + 1 }}</td>
-                        <td>{{ product.gtin }}</td>
-                        <td>{{ product.product }}</td>
-                        <td>{{ product.price | currency: 'USD'}}</td>
-                        <td>
-                          <div class="td-status" [ngClass]="{'td-status-enable': product.status == 1, 'td-status-disable': product.status == 0}" >
-                            {{ product.status == 0 ? "Inactivo" : "Activo" }}
-                            </div>
-                        </td>
-
-                        <td>
-                          <div class="dropdown">
-                            <!-- dots button  -->
-                            <button class="dropdown-button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                              <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
-                            </button>
-        
-                            <!-- menu options -->
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                              <a class="dropdown-item" (click)="updateProduct(product.gtin)">
-                                <i class="ph ph-note-pencil icon-text-ul"></i>Editar
-                              </a>
-                              <a class="dropdown-item">
-                                <i class="ph ph-eye icon-text-ul"></i>Ver detalles
-                              </a>
-                              <a *ngIf="product.status == 0" class="dropdown-item enable-item" (click)="enableProduct(product.product_id)">
-                                <i class="ph ph-check-circle icon-text-ul"></i>Activar
-                              </a>
-                              <a *ngIf="product.status == 1" class="dropdown-item disable-item" (click)="disableProduct(product.product_id)">
-                                <i class="ph ph-x-circle icon-text-ul"></i>Desactivar
-                              </a>
-                            </div>
-                          </div>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<!-- Modal form  -->
-
-<div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="modalForm">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Producto</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="card-header clearfix">
+        <div class="header-container">
+          <h3 class="text-center"><strong>Productos</strong></h3>
         </div>
-        <div class="modal-body">
+        <div class="align-button">
+          <button type="button" class="btn btn-dark" (click)="showModalForm()">
+                <i class="ph ph-plus-circle"></i>
+                Agregar producto
+          </button>
+        </div>
+      </div>
 
-            <!-- Product form  -->
-            
-            <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  
-            
-                <div class="row">
+      <!-- Card body -->
 
-                    <!-- gtin  -->
+      <div class="card-body">
+
+          <!-- Region table  -->
+
+          <table class="table table-stripped">
+              <thead class="thead-dark">
+                <tr class="text-white">
+                    <th>Id</th>
+                    <th>Gtin</th>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Estatus</th>
+                    <th>Más</th>
+                </tr>
+              </thead>
+              <tbody>
+                  @for(product of products; track product; let i = $index ) {
+                      <tr class="table-dafault text-white">
+                          <td>{{ i + 1 }}</td>
+                          <td>{{ product.gtin }}</td>
+                          <td>{{ product.product }}</td>
+                          <td>{{ product.price | currency: 'USD'}}</td>
+                          <td>
+                            <div class="td-status" [ngClass]="{'td-status-enable': product.status == 1, 'td-status-disable': product.status == 0}" >
+                              {{ product.status == 0 ? "Inactivo" : "Activo" }}
+                              </div>
+                          </td>
+
+                          <td>
+                            <div class="dropdown">
+                              <!-- dots button  -->
+                              <button class="dropdown-button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
+                              </button>
+          
+                              <!-- menu options -->
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" (click)="updateProduct(product.gtin)">
+                                  <i class="ph ph-note-pencil icon-text-ul"></i>Editar
+                                </a>
+                                <a class="dropdown-item">
+                                  <i class="ph ph-eye icon-text-ul"></i>Ver detalles
+                                </a>
+                                <a *ngIf="product.status == 0" class="dropdown-item enable-item" (click)="enableProduct(product.product_id)">
+                                  <i class="ph ph-check-circle icon-text-ul"></i>Activar
+                                </a>
+                                <a *ngIf="product.status == 1" class="dropdown-item disable-item" (click)="disableProduct(product.product_id)">
+                                  <i class="ph ph-x-circle icon-text-ul"></i>Desactivar
+                                </a>
+                              </div>
+                            </div>
+                          </td>
+                      </tr>
+                  }
+              </tbody>
+          </table>
+      </div>
+  </div>
+
+  <!-- Modal form  -->
+
+  <div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="modalForm">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content size-body">
+          <div class="modal-header">
+            <h5 class="modal-title">Producto</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+              <!-- Product form  -->
+              
+              <form [formGroup]="form" (ngSubmit)="onSubmit()" id="fm">
     
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                          <label for="gtin">GTIN <span class="color-red">*</span> </label>
-                          <input type="text" class="form-control" formControlName="gtin" id="gtin" placeholder="Código GTIN del producto..." 
-                              [ngClass]="{'is-invalid': form.controls['gtin'].errors && submitted}" >
-                          @if (form.controls['gtin'].errors && submitted) {
-                            <small class="input-error-message">Favor de ingresar un código gtin válido</small>
-                          }
-                        </div>
-                    </div>
-          
-                    <!-- product  -->
-          
-                    <div class="col-md-6"> 
-                        <div class="mb-3">
-                          <label for="product">Producto <span class="color-red">*</span> </label>
-                          <input type="text" class="form-control" formControlName="product" id="product" placeholder="Nombre del producto..." 
-                              [ngClass]="{'is-invalid': form.controls['product'].errors && submitted}" >
-                          @if (form.controls['product'].errors && submitted) {
-                            <small class="input-error-message">Favor de ingresar un nombre de producto válido</small>
-                          }
-                        </div>
-                    </div>
-          
-                    <!-- price  -->
-          
-                    <div class="col-md-6"> 
-                        <div class="mb-3">
-                          <label for="price">Precio <span class="color-red">*</span> </label>
-                          <input type="text" class="form-control" formControlName="price" id="price" placeholder="Precio del producto..." 
-                              [ngClass]="{'is-invalid': form.controls['price'].errors && submitted}" >
-                          @if (form.controls['price'].errors && submitted) {
-                            <small class="input-error-message">Favor de ingresar un precio válido</small>
-                          }
-                        </div>
-                    </div>
-          
-                    <!-- stock  -->
-          
-                    <div class="col-md-6"> 
-                        <div class="mb-3">
-                          <label for="stock">Cantidad de productos <span class="color-red">*</span> </label>
-                          <input type="text" class="form-control" formControlName="stock" id="stock" placeholder="Número de stock del producto..." 
-                              [ngClass]="{'is-invalid': form.controls['stock'].errors && submitted}" >
-                          @if (form.controls['stock'].errors && submitted) {
-                            <small class="input-error-message">Favor de ingresar un número de stock válido</small>
-                          }
-                        </div>
-                    </div>  
-          
-                    <!-- category_id  -->
-          
-                    <div class="col-md-6"> 
-                        <div class="mb-3">
-                          <label for="category_id">Categoría <span class="color-red">*</span> </label>
-                          <select class="form-select" formControlName="category_id" id="category_id"
-                              [ngClass]="{'is-invalid': form.controls['category_id'].errors && submitted}">
-                            <option [ngValue]=null hidden>Selecciona una categoría...</option>
-                            @for(category of categories; track category) {
-                              <option [ngValue]="category.category_id">{{ category.category }}</option>
-                            }
-                          </select>
-                          @if (form.controls['category_id'].errors && submitted) {
-                            <small class="input-error-message">Favor de seleccionar válida</small>
-                          }
-                        </div>
-                    </div>
-          
-                    <!-- description  -->
-          
-                    <div class="mb-3">
-                      <label for="description">Descripción <span class="color-red">*</span> </label>
-                      <textarea rows="2" class="form-control" formControlName="description" id="description" placeholder="Descripción del producto..." 
-                        [ngClass]="{'is-invalid': form.controls['description'].errors && submitted}" >
-                      </textarea>
-                      @if (form.controls['description'].errors && submitted) {
-                        <small class="input-error-message">Favor de ingresar una descripción válida</small>
-                      }
-                    </div>
-                </div>
-      
-                <!-- button  -->
-                
-                <div class="form-button">
-                  <button type="submit" class="btn btn-primary btn-new">Guardar</button>
-                </div>
-      
-              </form>
+              
+                  <div class="row">
 
+                      <!-- gtin  -->
+      
+                      <div class="col-md-6">
+                          <div class="mb-3">
+                            <label for="gtin">GTIN <span class="color-red">*</span> </label>
+                            <input type="text" class="form-control" formControlName="gtin" id="gtin" placeholder="Código GTIN del producto..." 
+                                [ngClass]="{'is-invalid': form.controls['gtin'].errors && submitted}" >
+                            @if (form.controls['gtin'].errors && submitted) {
+                              <small class="input-error-message">Favor de ingresar un código gtin válido</small>
+                            }
+                          </div>
+                      </div>
+            
+                      <!-- product  -->
+            
+                      <div class="col-md-6"> 
+                          <div class="mb-3">
+                            <label for="product">Producto <span class="color-red">*</span> </label>
+                            <input type="text" class="form-control" formControlName="product" id="product" placeholder="Nombre del producto..." 
+                                [ngClass]="{'is-invalid': form.controls['product'].errors && submitted}" >
+                            @if (form.controls['product'].errors && submitted) {
+                              <small class="input-error-message">Favor de ingresar un nombre de producto válido</small>
+                            }
+                          </div>
+                      </div>
+            
+                      <!-- price  -->
+            
+                      <div class="col-md-6"> 
+                          <div class="mb-3">
+                            <label for="price">Precio <span class="color-red">*</span> </label>
+                            <input type="text" class="form-control" formControlName="price" id="price" placeholder="Precio del producto..." 
+                                [ngClass]="{'is-invalid': form.controls['price'].errors && submitted}" >
+                            @if (form.controls['price'].errors && submitted) {
+                              <small class="input-error-message">Favor de ingresar un precio válido</small>
+                            }
+                          </div>
+                      </div>
+            
+                      <!-- stock  -->
+            
+                      <div class="col-md-6"> 
+                          <div class="mb-3">
+                            <label for="stock">Cantidad de productos <span class="color-red">*</span> </label>
+                            <input type="text" class="form-control" formControlName="stock" id="stock" placeholder="Número de stock del producto..." 
+                                [ngClass]="{'is-invalid': form.controls['stock'].errors && submitted}" >
+                            @if (form.controls['stock'].errors && submitted) {
+                              <small class="input-error-message">Favor de ingresar un número de stock válido</small>
+                            }
+                          </div>
+                      </div>  
+            
+                      <!-- category_id  -->
+            
+                      <div class="col-md-6"> 
+                          <div class="mb-3">
+                            <label for="category_id">Categoría <span class="color-red">*</span> </label>
+                            <select class="form-select" formControlName="category_id" id="category_id"
+                                [ngClass]="{'is-invalid': form.controls['category_id'].errors && submitted}">
+                              <option [ngValue]=null hidden>Selecciona una categoría...</option>
+                              @for(category of categories; track category) {
+                                <option [ngValue]="category.category_id">{{ category.category }}</option>
+                              }
+                            </select>
+                            @if (form.controls['category_id'].errors && submitted) {
+                              <small class="input-error-message">Favor de seleccionar válida</small>
+                            }
+                          </div>
+                      </div>
+            
+                      <!-- description  -->
+            
+                      <div class="mb-3">
+                        <label for="description">Descripción <span class="color-red">*</span> </label>
+                        <textarea rows="2" class="form-control" formControlName="description" id="description" placeholder="Descripción del producto..." 
+                          [ngClass]="{'is-invalid': form.controls['description'].errors && submitted}" >
+                        </textarea>
+                        @if (form.controls['description'].errors && submitted) {
+                          <small class="input-error-message">Favor de ingresar una descripción válida</small>
+                        }
+                      </div>
+                  </div>
+        
+                  <!-- button  -->
+                  
+                  <div class="form-button">
+                    <button type="submit" class="btn modal-btn btn-primary btn-new">Guardar</button>
+                  </div>
+        
+                </form>
+
+          </div>
         </div>
       </div>
     </div>
   </div>
+</section>
