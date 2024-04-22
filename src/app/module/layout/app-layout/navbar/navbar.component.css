@@ -1,0 +1,83 @@
+.nav {
+    background: #a364ff;
+
+}
+
+.brand-text {
+    font-weight: bold;
+    color: white;
+    font-size: 40px;
+
+}
+
+.nav-logo {
+    width: 100px;
+    height: 100px;
+
+
+    margin-right: 20px;
+    margin-left: 8px;
+}
+
+
+.color-blue {
+    background-color: #9889f0;
+}
+
+.navbar {
+    padding: 8px;
+}
+
+.navbar-content {
+    max-width: 1280px;
+    margin: auto;
+}
+
+.nav-dropdown-menu {
+    background-color: #070a0c;
+    border-radius: 0px;
+    margin-top: 13px;
+    border: none;
+}
+
+.nav-dropdown-item {
+    color: white !important;
+}
+
+.nav-dropdown-item:hover {
+    background-color: white;
+    color: black !important;
+}
+
+.nav-dropdown-menu-user {
+    margin-top: 9px;
+    left: -150%;
+}
+
+.nav-user-img {
+    width: 32px;
+}
+
+.ph-shopping-bag {
+    color: white;
+    font-size: 28px;
+    vertical-align: middle;
+    margin-right: 8px;
+    margin-left: 24px;
+}
+
+.ph-user {
+    color: white;
+    font-size: 28px;
+    vertical-align: middle;
+    margin-right: 8px;
+    margin-left: 24px;
+}
+
+.nav-link {
+    cursor: pointer;
+}
+
+.nav-register {
+    margin-left: 12px;
+}

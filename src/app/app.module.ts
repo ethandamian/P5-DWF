@@ -12,7 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AuthenticationModule } from './module/authentication/authentication.module';
 import { CommonsModule } from './module/commons/commons.module';
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponent } from './module/layout/app-layout/navbar/navbar.component';
 
 @NgModule({
   declarations: [
