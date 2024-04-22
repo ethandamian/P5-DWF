@@ -4,6 +4,11 @@ import { ProductService } from '../../_service/product.service';
 import { CategoryService } from '../../_service/category.service';
 import Swal from 'sweetalert2';
 import { Category } from '../../_model/category';
+import { ProductComponent } from '../product/product.component';
+import { FormBuilder, Validators } from '@angular/forms';
+import { SwalMessages } from '../../../commons/_dto/swal-message';
+
+declare var $: any;
 
 @Component({
   selector: 'app-product-detail',
@@ -15,10 +20,25 @@ export class ProductDetailComponent {
     gtin = '0';
     product: any = {};
     category: any = {};
-    editar = false;
     categories: Category[] = [];
+    submitted=false;
+    swal: SwalMessages = new SwalMessages();
     
-    constructor(private rutaActiva: ActivatedRoute, private productService: ProductService, private categoryService: CategoryService) { }
+    constructor(
+      private rutaActiva: ActivatedRoute, 
+      private productService: ProductService, 
+      private categoryService: CategoryService,
+      private formBuilder: FormBuilder
+    ) { }
+
+    form = this.formBuilder.group({
+      product: ["", [Validators.required]],
+      gtin: ["", [Validators.required, Validators.pattern('^[0-9]{13}$')]],
+      description: ["", [Validators.required]],
+      price: [0, [Validators.required, Validators.pattern('^[0-9]*$')]],
+      stock: [0, [Validators.required, Validators.pattern('^[0-9]*$')]],
+      category_id: [0, [Validators.required]],
+    })
   
     ngOnInit(): void {
       this.gtin = this.rutaActiva.snapshot.params['gtin'];
@@ -56,8 +76,61 @@ export class ProductDetailComponent {
       })
     }
 
+    getProduct(){
+      this.product = this.productService.getProduct(this.gtin).subscribe({
+        next: (v) => {
+          this.product = v.body;
+          this.category = this.categoryService.getCategory(this.product.category_id).subscribe({
+            next: (v) => {
+              this.category = v.body?.category;
+            },
+            error: (e) => {
+              console.log(e);
+            }
+          })
+        }
+      })
+    }
+
+    hideModalForm(){
+      $("#modalForm").modal("hide");
+    }
+
+    onSubmitUpdate(){
+      this.productService.updateProduct(this.form.value, parseInt(this.gtin)).subscribe({
+        next: (v) => {
+          this.swal.successMessage(v.body!.message); // show message
+          this.getProduct(); // reload products
+          this.hideModalForm(); // close modal
+        },
+        error: (e) => {
+          console.error(e);
+          this.swal.errorMessage(e.error!.message); // show message
+        }
+      });
+    }
+
     editarProducto() {
-      this.editar = true;
-      console.log(this.editar);
+      this.productService.getProduct(this.gtin).subscribe({
+        next: (v) => {
+          let product = v.body!;
+  
+          this.form.reset();
+          this.submitted = false;
+  
+          this.form.controls['product'].setValue(product.product);
+          this.form.controls['gtin'].setValue(product.gtin);
+          this.form.controls['price'].setValue(product.price);
+          this.form.controls['stock'].setValue(product.stock);
+          this.form.controls['category_id'].setValue(product.category_id);
+          this.form.controls['description'].setValue(product.description);
+  
+          $("#modalForm").modal("show");
+        },
+        error: (e) => {
+          console.log(e);
+          this.swal.errorMessage(e.error!.message); // show message
+        }
+      });
     }
 }
