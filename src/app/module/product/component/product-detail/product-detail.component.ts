@@ -23,6 +23,7 @@ export class ProductDetailComponent {
     categories: Category[] = [];
     submitted=false;
     swal: SwalMessages = new SwalMessages();
+    id = 0;
     
     constructor(
       private rutaActiva: ActivatedRoute, 
@@ -96,8 +97,19 @@ export class ProductDetailComponent {
       $("#modalForm").modal("hide");
     }
 
+    onSubmit(){
+      this.submitted = true;
+      if(this.form.invalid){
+        return;
+      }
+      this.submitted=false;
+      this.onSubmitUpdate();
+    
+    }
+
     onSubmitUpdate(){
-      this.productService.updateProduct(this.form.value, parseInt(this.gtin)).subscribe({
+      console.log(this.form.value);
+      this.productService.updateProduct(this.form.value, this.id).subscribe({
         next: (v) => {
           this.swal.successMessage(v.body!.message); // show message
           this.getProduct(); // reload products
@@ -114,6 +126,8 @@ export class ProductDetailComponent {
       this.productService.getProduct(this.gtin).subscribe({
         next: (v) => {
           let product = v.body!;
+
+          this.id = product.product_id;
   
           this.form.reset();
           this.submitted = false;
