@@ -58,7 +58,7 @@
                                 <a class="dropdown-item" (click)="updateProduct(product.gtin)">
                                   <i class="ph ph-note-pencil icon-text-ul"></i>Editar
                                 </a>
-                                <a class="dropdown-item">
+                                <a class="dropdown-item" (click)="showDetail(product.gtin)">
                                   <i class="ph ph-eye icon-text-ul"></i>Ver detalles
                                 </a>
                                 <a *ngIf="product.status == 0" class="dropdown-item enable-item" (click)="enableProduct(product.product_id)">

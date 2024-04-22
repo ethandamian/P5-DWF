@@ -6,6 +6,7 @@ import { DtoProductList } from '../../_dto/dto-product-list';
 import { Category } from '../../_model/category';
 import { CategoryService } from '../../_service/category.service';
 import { Product } from '../../_model/product';
+import { Router, ActivatedRoute } from '@angular/router';
 
 declare var $: any; // JQuery
 
@@ -39,6 +40,8 @@ export class ProductComponent {
     private categoryService: CategoryService,
     private productService: ProductService,
     private formBuilder: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute
   ){}
 
   ngOnInit(){
@@ -157,6 +160,13 @@ export class ProductComponent {
       }
     });
   }
+
+  showDetail(gtin: string){
+    //redirect to product detail
+    // this.router.navigate(['/product/detail'], { queryParams: { gtin: gtin } });
+    this.router.navigate([`product/${gtin}`]);
+  }
+
 
   updateProduct(gtin: string){
     this.productService.getProduct(gtin).subscribe({

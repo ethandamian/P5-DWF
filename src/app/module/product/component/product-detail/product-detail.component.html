@@ -1,0 +1,70 @@
+
+
+<div class="container">
+    <form>
+        <div class="row">
+            <div class="title">
+                <h1>{{product.product}}</h1>
+                <button (click)="editarProducto()">
+                <i class="ph ph-note-pencil icon-text-ul"></i>Editar
+                </button>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="gtin">GTIN</label>
+                    <p>{{product.gtin}}</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="price">Precio</label>
+                    @if(editar){
+                        <input type="text" class="form-control" id="price" formControlName="price" placeholder="Precio" required value={{product.price}}/>
+                    }
+                    @else{
+                        <p>$ {{product.price}}</p>
+                    }
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="stock">Cantidad de productos</label>
+                    @if(editar){
+                        <input type="text" class="form-control" id="stock" formControlName="stock" placeholder="Stock" required value={{product.stock}}/>
+                    }
+                    @else{
+                        <p>{{product.stock}}</p>
+                    }
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="category_id">Categoría</label>
+                    @if(editar){
+                        <select class="form-select" id="category_id" required>
+                            <option>{{category}}</option>
+                            @for(cat of categories; track cat) {
+                                <option [ngValue]="cat.category_id">{{ cat.category }}</option>
+                            }
+                        </select>
+                    }
+                    @else{
+                        <p>{{category}}</p>
+                    }
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="description">Descripción</label>
+                @if(editar){
+                    <textarea class="form-control" id="description" formControlName="description" placeholder="Descripción" required value={{product.description}}></textarea>
+                }
+                @else{
+                    <p>{{product.description}}</p>
+                }
+            </div>
+        </div>
+        @if(editar){
+            <button type="submit" class="btn btn-primary edit-btn btn-new">Guardar</button>
+        }
+    </form>
+</div>

@@ -5,6 +5,7 @@ import { RegisterComponent } from '../../authentication/register/register.compon
 import { LoginComponent } from '../../authentication/login/login.component';
 import { SecuredComponent } from '../../authentication/secured/secured.component';
 import { authenticationGuard } from '../../authentication/_guard/authentication.guard';
+import { ProductDetailComponent } from '../../product/component/product-detail/product-detail.component';
 
 
 export const AppLayoutRoutes: Routes = [
@@ -13,5 +14,6 @@ export const AppLayoutRoutes: Routes = [
     // {path: 'register', component: RegisterComponent},
     // {path: 'login', component: LoginComponent},
     { path: 'secured', component: SecuredComponent, canActivate: [authenticationGuard] },
-    { path: 'product', component: ProductComponent }
+    { path: 'product', component: ProductComponent},
+        { path: 'product/:gtin', component: ProductDetailComponent }
 ];

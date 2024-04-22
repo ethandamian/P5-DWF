@@ -1,0 +1,27 @@
+h1{
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+
+}
+
+.title{
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+label{
+    font-weight: bold;
+    font-size: 30px;
+}
+
+p{
+    font-size: 22px;
+}
+
+.edit-btn {
+    width: 150px;
+    margin-top: 1rem;
+    padding: auto;
+    background: #6c35de;
+}
