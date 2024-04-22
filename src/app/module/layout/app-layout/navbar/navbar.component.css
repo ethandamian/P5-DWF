@@ -34,7 +34,7 @@
 }
 
 .nav-dropdown-menu {
-    background-color: #070a0c;
+    background-color: #201925;
     border-radius: 0px;
     margin-top: 13px;
     border: none;
@@ -47,6 +47,7 @@
 .nav-dropdown-item:hover {
     background-color: white;
     color: black !important;
+    cursor: pointer;
 }
 
 .nav-dropdown-menu-user {

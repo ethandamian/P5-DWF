@@ -121,6 +121,7 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('/secured');
 
           this.showLoading = false;
+          window.location.reload();
 
         },
 

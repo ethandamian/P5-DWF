@@ -32,11 +32,12 @@ export class NavbarComponent {
 
     if (localStorage.getItem('user')) {
       let user = JSON.parse(localStorage.getItem('user')!);
-      if (user.role == 'ADMIN') {
+      if (user.rol == 'ADMIN') {
         this.isAdmin = true;
       } else {
         this.isAdmin = false;
       }
+      console.log(this.isAdmin);
     }
 
     this.getCategories();
