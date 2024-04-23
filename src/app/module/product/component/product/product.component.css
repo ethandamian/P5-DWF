@@ -162,3 +162,21 @@
 .td-status-disable {
     background-color: #e74c3c;
 }
+
+.new-image-btn {
+    margin-left: 26rem;
+    background: rgb(100, 98, 98);
+}
+
+.new-image-btn:hover {
+    background: rgb(88, 86, 86);
+}
+
+.no-images-text {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+input[type="file"] {
+    display: none;
+}

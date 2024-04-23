@@ -36,7 +36,8 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/ngx-photo-editor/photo-editor.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",

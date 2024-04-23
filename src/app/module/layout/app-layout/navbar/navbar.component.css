@@ -4,6 +4,11 @@
 
 }
 
+.nav-link {
+    color: white;
+    font-weight: bold;
+}
+
 .brand-text {
     font-weight: bold;
     color: white;
@@ -82,4 +87,9 @@
 
 .nav-register {
     margin-left: 12px;
+}
+
+.btn {
+    background-color: #554b83;
+    border: none;
 }

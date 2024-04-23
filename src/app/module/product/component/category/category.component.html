@@ -11,7 +11,7 @@
 
                     <button type="button" class="btn btn-dark" (click)="showModal()">
                         <i class="ph ph-plus"></i>
-                        New
+                        New Category
 
                     </button>
                 </div>
@@ -39,7 +39,7 @@
                             <td>
                                 <div class="td-status"
                                     [ngClass]="{'td-status-enable': category.status == 1, 'td-status-disable': category.status == 0}">
-                                    {{category.status == 1 ? "Activo" : "Inactivo"}}
+                                    {{category.status == 1 ? "Active" : "Inactive"}}
                                 </div>
                             </td>
                             <td>
