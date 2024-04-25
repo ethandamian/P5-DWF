@@ -221,12 +221,12 @@
 
           <section class="images-container">
             <div *ngIf="productImages.length > 0; else noImages">
-              @for(image of productImages; track image){
-              <div>
-                <img [src]="image.image" alt="Product Image" class="img-fluid" style="margin-bottom: 10px;">
-              </div>
+              <div class="product-images-container">
+                @for(image of productImages; track image){
+                <img [src]="image.image" alt="Product Image" class="img-fluid product-img" style="margin-bottom: 10px;">
 
-              }
+                }
+              </div>
 
             </div>
             <ng-template #noImages>

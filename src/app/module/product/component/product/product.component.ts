@@ -230,7 +230,7 @@ export class ProductComponent {
     productImage.image = image;
     this.productImageService.createProductImage(productImage).subscribe({
       next: (v) => {
-        this.swal.successMessage(v.body!.message); // show message
+        this.swal.successMessage("Image created"); // show message
         this.getProductImages(this.product_id); // reload images
       },
       error: (e) => {

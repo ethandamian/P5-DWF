@@ -1,4 +1,4 @@
-<div class="container" style="margin-top: 100px;">
+<div class="container">
 
     <div class="d-flex justify-content-center h-50">
 
@@ -29,8 +29,8 @@
 
                     </div>
 
-                    <span class="help-block" style="color:red;"
-                        *ngIf="fg.username.invalid && fg.username.touched">Ingresa un username</span>
+                    <span class="help-block" style="color:red;" *ngIf="fg.username.invalid && fg.username.touched">Enter
+                        your username</span>
 
                     <div class="input-group mb-2">
 
@@ -45,19 +45,16 @@
 
                     </div>
 
-                    <span class="help-block" style="color:red;"
-                        *ngIf="fg.password.invalid && fg.password.touched">Ingresa la contraseña.</span>
+                    <span class="help-block" style="color:red;" *ngIf="fg.password.invalid && fg.password.touched">Enter
+                        yout password.</span>
 
                     <div class="d-flex justify-content-center mt-3 login_container">
 
                         <button type="submit" [disabled]="loginForm.invalid || showLoading" name="button"
                             class="btn login_btn">
-
                             <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;
-
-                            <span *ngIf="showLoading">Cargando...</span>
-
-                            <span *ngIf="!showLoading">Login</span>
+                            <span *ngIf="showLoading">Loading...</span>
+                            <span *ngIf="!showLoading" class="login-button-text">Login</span>
 
                         </button>
 
@@ -71,7 +68,8 @@
 
                 <div class="d-flex justify-content-center links">
 
-                    ¿Necesitas una cuenta? <a routerLink="/register" class="ml-2" style="color: #2C3E50;">Registrate</a>
+                    Do you need an account? <a routerLink="/register" class="ml-2"
+                        style="color: #9d6ed3; margin-left:1px;"> Sign up</a>
 
                 </div>
 

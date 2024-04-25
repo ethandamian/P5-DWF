@@ -1,0 +1,13 @@
+.container {
+    margin-top: 35px;
+}
+
+.btn {
+    background: rgb(100, 98, 98);
+    padding: 6px;
+}
+
+.login-button-text {
+    text-align: center;
+
+}

@@ -180,3 +180,15 @@
 input[type="file"] {
     display: none;
 }
+
+.product-images-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* Dos columnas de tamaño igual */
+    grid-gap: 20px;
+    /* Espacio entre las imágenes */
+}
+
+.product-img {
+    width: 450px;
+}
