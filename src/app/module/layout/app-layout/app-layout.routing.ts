@@ -6,10 +6,11 @@ import { LoginComponent } from '../../authentication/login/login.component';
 import { SecuredComponent } from '../../authentication/secured/secured.component';
 import { authenticationGuard } from '../../authentication/_guard/authentication.guard';
 import { ProductDetailComponent } from '../../product/component/product-detail/product-detail.component';
+import { HomeComponent } from '../../../home/home.component';
 
 
 export const AppLayoutRoutes: Routes = [
-    { path: '', component: CategoryComponent },
+    { path: '', component: HomeComponent },
     { path: 'category', component: CategoryComponent },
     // {path: 'register', component: RegisterComponent},
     // {path: 'login', component: LoginComponent},

@@ -24,6 +24,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.3",
+    "cropperjs": "^1.6.2",
     "jquery": "^3.7.1",
     "ngx-photo-editor": "^0.4.4",
     "rxjs": "~7.8.0",
