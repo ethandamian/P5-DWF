@@ -15,3 +15,16 @@
     padding-top: 50px;
     margin-top: 50px;
 }
+
+.see-more{
+    background-color: #a364ff;
+    padding:10px ;
+}
+
+.see-more:hover{
+    background-color: #5f48e2;
+}
+
+.boton{
+    padding-bottom:20px;
+}
