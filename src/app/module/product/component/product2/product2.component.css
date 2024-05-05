@@ -1,0 +1,19 @@
+.td-status {
+    position: absolute;
+    width: 100px;
+    text-align: center;
+    border-radius: 8px;
+    color: white;
+    
+}
+
+
+.td-status-enable {
+    background-color: #3498db;
+}
+
+
+.td-status-disable {
+    background-color: #e74c3c;
+}
+

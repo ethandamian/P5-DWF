@@ -20,6 +20,8 @@ declare var $: any; // JQuery
 })
 export class Product2Component {
 
+  isAdmin: boolean = false;
+
   products: DtoProductList[] = []; // product list
   productToUpdate: number = 0; // product id to update
   productImages: ProductImage[] = []; // product images
@@ -54,6 +56,14 @@ export class Product2Component {
   ) { }
 
   ngOnInit() {
+    if (localStorage.getItem('user')) {
+      let user = JSON.parse(localStorage.getItem('user')!);
+      if (user.rol == 'ADMIN') {
+        this.isAdmin = true;
+      } else {
+        this.isAdmin = false;
+      }
+    }
     this.route.params.subscribe(params => {
       if(params['categoryId']){
         const categoryId = params['categoryId'];
