@@ -13,7 +13,7 @@ declare var $: any;
 })
 export class NavbarComponent {
   categories: Category[] = [];
-
+  
   loggedIn: boolean = false;
   isAdmin: boolean = false;
 
@@ -68,7 +68,6 @@ export class NavbarComponent {
   showRegisterModal() {
     $("#registerModal").modal("show");
   }
-
 
 
 }
