@@ -1,0 +1,59 @@
+<section class="bg-dark">
+  <div class="card-container">
+      <div class="card bg-dark">
+    <!-- Card header -->
+
+    <div class="card-header clearfix">
+          <div class="header-container">
+            <h4>Listado de facturas</h4>
+          </div>
+    </div>
+
+    <!-- Card body -->
+
+    <div class="card-body">
+
+        <!-- Invoice table  -->
+
+        <table class="table table-stripped">
+            <thead>
+              <tr class="text-white">
+                <th scope="col">No.</th>
+                <th scope="col">Código</th>
+                <th scope="col">Monto total</th>
+                <th scope="col">Fecha de compra</th>
+                <th scope="col">Más</th>
+              </tr>
+            </thead>
+            <tbody>
+                @for(invoice of invoices; track invoice; let i = $index ) {
+                    <tr class="table-default text-white">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ invoice.invoice_id }}</td>
+                        <td>$ {{ invoice.total}}</td>
+                        <td>{{ invoice.created_at}}</td>
+
+                        <td>
+                          <div class="dropdown">
+                            <!-- dots button  -->
+                            <button class="dropdown-button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
+                            </button>
+        
+        
+                            <!-- menu options -->
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item">
+                                    <i class="ph ph-eye icon-text-ul"></i>Ver detalles
+                                </a>
+                            </div>
+                          </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+</section>

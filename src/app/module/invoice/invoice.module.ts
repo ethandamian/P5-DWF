@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { InvoiceComponent } from './component/invoice/invoice.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    InvoiceComponent
+  ],
   imports: [
     CommonModule
   ]

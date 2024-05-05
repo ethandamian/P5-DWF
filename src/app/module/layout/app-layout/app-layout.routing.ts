@@ -7,6 +7,7 @@ import { SecuredComponent } from '../../authentication/secured/secured.component
 import { authenticationGuard } from '../../authentication/_guard/authentication.guard';
 import { ProductDetailComponent } from '../../product/component/product-detail/product-detail.component';
 import { HomeComponent } from '../../../home/home.component';
+import { InvoiceComponent } from '../../invoice/component/invoice/invoice.component';
 
 
 export const AppLayoutRoutes: Routes = [
@@ -16,5 +17,6 @@ export const AppLayoutRoutes: Routes = [
     // {path: 'login', component: LoginComponent},
     { path: 'secured', component: SecuredComponent, canActivate: [authenticationGuard] },
     { path: 'product', component: ProductComponent},
-        { path: 'product/:gtin', component: ProductDetailComponent }
+    { path: 'product/:gtin', component: ProductDetailComponent },
+    {path: "factura", component:InvoiceComponent}
 ];
