@@ -13,7 +13,8 @@ import { ProductImage } from '../module/product/_model/product-image';
 export class HomeComponent {
 
   swal: SwalMessages = new SwalMessages(); // swal messages
-
+  isAdmin: boolean = false; // isAdmin
+  loggedIn: boolean = false; // is logged in
 
   products: DtoProductList[] = [];
   productsImages: ProductImage[][] = [[]]; // products images
@@ -25,6 +26,19 @@ export class HomeComponent {
   ) {}
 
   ngOnInit() {
+    if (localStorage.getItem('token')) {
+      this.loggedIn = true;
+    }
+
+    if (localStorage.getItem('user')) {
+      let user = JSON.parse(localStorage.getItem('user')!);
+      if (user.rol == 'ADMIN') {
+        this.isAdmin = true;
+      } else {
+        this.isAdmin = false;
+      }
+      console.log(this.isAdmin);
+    }
     this.getProducts();
     // Get the images of the products
   }
@@ -77,6 +91,7 @@ export class HomeComponent {
   }
 
   seeMore(){
+    
 
   }
 }
