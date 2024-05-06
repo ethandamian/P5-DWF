@@ -1,10 +1,104 @@
+.card {
+    padding: 20px;
+    margin-top: 20px;
+    max-width: 1280px;
+    margin: auto;
+    width: 100%;
+}
+
+.modal-dialog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 60px);
+
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 600px;
+    height: 340px;
+    margin: auto;
+}
+
+
+.modal-btn {
+    width: 150px;
+    margin-top: 1rem;
+    padding: auto;
+    background: #6c35de;
+}
+
+.input-error-message {
+    color: red;
+}
+
+.btn-new {
+    width: 240px;
+}
+
+.form-button {
+    text-align: center;
+}
+
+.size-body {
+    height: fit-content;
+}
+
+.icon-menu {
+    color: white;
+}
+
+.dropdown-button {
+    border: none;
+    background-color: #202020;
+}
+
+
+.dropdown-item {
+    color: white !important;
+    cursor: pointer;
+}
+
+
+.dropdown-item:hover {
+    color: rgb(255, 255, 255) !important;
+}
+
+
+.enable-item {
+    color: rgb(0, 119, 255) !important;
+    cursor: pointer;
+}
+
+
+.enable-item:hover {
+    color: white !important;
+}
+
+
+.disable-item {
+    color: red !important;
+    cursor: pointer;
+}
+
+
+.disable-item:hover {
+    color: white !important;
+}
+
+
+.icon-text-ul {
+    font-size: 14px;
+    margin-right: 8px;
+}
+
 .td-status {
     position: absolute;
     width: 100px;
     text-align: center;
     border-radius: 8px;
     color: white;
-    
 }
 
 
@@ -16,4 +110,49 @@
 .td-status-disable {
     background-color: #e74c3c;
 }
+
+.new-image-btn {
+    margin-left: 26rem;
+    background: rgb(100, 98, 98);
+}
+
+.new-image-btn:hover {
+    background: rgb(88, 86, 86);
+}
+
+.no-images-text {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.product-images-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* Dos columnas de tamaño igual */
+    grid-gap: 20px;
+    /* Espacio entre las imágenes */
+}
+
+.product-img {
+    width: 450px;
+}
+
+.position{
+    display: block;
+    margin-top: 20px;
+}
+
+.line{
+    border: 1px solid #fff;
+    border-radius: 10%;
+}
+
+.line:hover{
+    background-color: #4c4a4a;
+}
+
 
