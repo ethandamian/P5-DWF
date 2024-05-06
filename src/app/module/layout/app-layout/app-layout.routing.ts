@@ -17,7 +17,7 @@ export const AppLayoutRoutes: Routes = [
     // {path: 'register', component: RegisterComponent},
     // {path: 'login', component: LoginComponent},
     { path: 'secured', component: SecuredComponent, canActivate: [authenticationGuard] },
-    { path: 'product', component: ProductComponent},
+    { path: 'product', component: Product2Component},
     {path: 'product/:categoryId/:category', component: Product2Component},
     { path: 'product/:gtin', component: ProductDetailComponent },
     {path: "factura", component:InvoiceComponent}
