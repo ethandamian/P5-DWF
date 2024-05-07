@@ -26,6 +26,8 @@ export class ProductComponent {
   product_id: number = 0;
 
   categories: Category[] = []; // category list
+  isAdmin: boolean = false; // isAdmin
+  loggedIn: boolean = false; // is logged in
 
   // Product form
   form = this.formBuilder.group({
@@ -52,6 +54,22 @@ export class ProductComponent {
   ) { }
 
   ngOnInit() {
+    if (localStorage.getItem('token')) {
+      this.loggedIn = true;
+    }else{
+      this.router.navigate(['/']);
+    }
+
+    if (localStorage.getItem('user')) {
+      let user = JSON.parse(localStorage.getItem('user')!);
+      if (user.rol == 'ADMIN') {
+        this.isAdmin = true;
+      } else {
+        this.router.navigate(['/']);
+        this.isAdmin = false;
+      }
+      console.log(this.isAdmin);
+    }
     this.getProducts();
     this.getActiveCategories();
   }
@@ -200,6 +218,7 @@ export class ProductComponent {
 
         this.form.controls['product'].setValue(product.product);
         this.form.controls['gtin'].setValue(product.gtin);
+        // this.form.controls['gtin'].disable();
         this.form.controls['price'].setValue(product.price);
         this.form.controls['stock'].setValue(product.stock);
         this.form.controls['category_id'].setValue(product.category_id);
@@ -274,6 +293,29 @@ export class ProductComponent {
       error: (e) => {
         console.log(e);
         this.swal.errorMessage(e.error!.message); // show message
+      }
+    });
+  }
+
+  deleteProductImage(image_id: number, product_id: number) {
+    this.swal.confirmMessage.fire({
+      title: 'Please confirm the image deletion',
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Confirm',
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+        this.productImageService.deleteProductImage(image_id).subscribe({
+          next: (v) => {
+            this.swal.successMessage("Image deleted"); // show message
+            this.getProductImages(product_id); // reload images
+          },
+          error: (e) => {
+            console.error(e);
+            this.swal.errorMessage(e.error!.message); // show message
+          }
+        });
       }
     });
   }

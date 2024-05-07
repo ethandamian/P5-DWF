@@ -1,10 +1,10 @@
 <div class="container">
-
-  <form>
+  
     <div class="row">
       <div class="title">
         <button class="btn btn-back" (click)="goBack()">
           <i class="ph ph-arrow-left"></i>
+          <span> Go back</span>
         </button>
         <h1 class="title">{{product.product}}</h1>
 
@@ -12,36 +12,35 @@
       <div class="col-md-6">
         <div class="mb-3">
           <label class="details-label" for="gtin">GTIN </label>
-          <p>{{product.gtin}}</p>
+          <p  class="paragraph">{{product.gtin}}</p>
         </div>
       </div>
       <div class="col-md-6">
         <div class="mb-3">
-          <label class="details-label " for="price">Precio</label>
-          <p>$ {{product.price}}</p>
+          <label class="details-label " for="price">Price</label>
+          <p class="paragraph">$ {{product.price}}</p>
         </div>
       </div>
       <div class="col-md-6">
         <div class="mb-3">
-          <label class="details-label" for="stock">Cantidad de productos</label>
-          <p class="stock">{{product.stock}}</p>
+          <label class="details-label" for="stock">Product stock</label>
+          <p class="stock paragraph">{{product.stock}}</p>
 
         </div>
       </div>
       <div class="col-md-6">
         <div class="mb-3">
-          <label class="details-label" for="category_id">Categoría</label>
-          <p>{{category}}</p>
+          <label class="details-label" for="category_id">Category</label>
+          <p class="paragraph">{{category}}</p>
         </div>
       </div>
       <div class="mb-3">
-        <label class="details-label" for="description">Descripción</label>
-        <p>{{product.description}}</p>
+        <label class="details-label" for="description">Product description</label>
+        <p class="paragraph">{{product.description}}</p>
       </div>
     </div>
-  </form>
   <button class="btn" (click)="editarProducto()">
-    <i class="ph ph-note-pencil icon-text-ul"></i>Edit
+    <i class="ph ph-note-pencil icon-text-ul"></i> Edit
   </button>
 </div>
 

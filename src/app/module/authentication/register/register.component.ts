@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 import { Usuario } from '../_model/usuario';
 
@@ -13,6 +13,9 @@ import { faGlobe, faKey, faLocationArrow, faUserPlus, faUserSecret } from '@fort
 import Swal from 'sweetalert2';
 
 import { Router } from '@angular/router';
+import { SwalMessages } from '../../commons/_dto/swal-message';
+
+declare var $: any;
 
 @Component({
 
@@ -48,6 +51,10 @@ export class RegisterComponent {
 
   constructor(private http: HttpClient, private router: Router) { }
 
+  @Output() registerEvent = new EventEmitter<boolean>();
+
+  swal: SwalMessages = new SwalMessages(); // swal messages
+
   onSubmit() {
 
     console.log(this.usuario);
@@ -80,7 +87,7 @@ export class RegisterComponent {
 
           if (result.isConfirmed) {
 
-            this.router.navigate(['/login']);
+            this.registerEvent.emit(true);
 
           }
 
@@ -88,9 +95,10 @@ export class RegisterComponent {
 
       },
 
-      (error) => {
+      (e) => {
+        
 
-        console.log('Error en llamada a la API de registro');
+        this.swal.errorMessage(e.error!.message);
 
       },
 
@@ -101,6 +109,12 @@ export class RegisterComponent {
       }
 
     )
+
+  }
+
+  showLoginModal(){
+    this.registerEvent.emit(true);
+    $("#loginModal").modal("show");
 
   }
 

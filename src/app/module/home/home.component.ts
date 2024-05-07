@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { DtoProductList } from '../module/product/_dto/dto-product-list';
-import { ProductService } from '../module/product/_service/product.service';
-import { SwalMessages } from '../module/commons/_dto/swal-message';
-import { ProductImageService } from '../module/product/_service/product-image.service';
-import { ProductImage } from '../module/product/_model/product-image';
+import { DtoProductList } from '../product/_dto/dto-product-list';
+import { ProductService } from '../product/_service/product.service';
+import { SwalMessages } from '../commons/_dto/swal-message';
+import { ProductImageService } from '../product/_service/product-image.service';
+import { ProductImage } from '../product/_model/product-image';
+import { Router } from '@angular/router';
+import { Product } from '../product/_model/product';
 
 @Component({
   selector: 'app-home',
@@ -17,10 +19,12 @@ export class HomeComponent {
   loggedIn: boolean = false; // is logged in
 
   products: DtoProductList[] = [];
-  productsImages: ProductImage[][] = [[]]; // products images
+  productImages: ProductImage[] = []; // product images
+  firstImage: ProductImage = new ProductImage();
 
 
   constructor(
+    private router: Router,
     private productService: ProductService,
     private productImageService: ProductImageService,
   ) {}
@@ -44,12 +48,11 @@ export class HomeComponent {
   }
 
   getProducts() {
-    this.productService.getProducts().subscribe({
+    this.productService.getProductsByCategory(3).subscribe({
       next: (v) => {
         this.products = v.body!;
         console.log(this.products);
         // Get the images of the products
-        this.getFirstImageOfProducts();
       },
       error: (e) => {
         console.log(e);
@@ -58,40 +61,29 @@ export class HomeComponent {
     });
   }
 
-  async getFirstImageOfProducts() {
-    let images: ProductImage[] = [];
-    
-    for (let i = 0; i < this.products.length; i++) {
-      const product = this.products[i];
-      await this.getProductImages(product.product_id, images);
-      
-      if (images.length > 0) {
-        console.log(images[0]);
-        this.productsImages[i].push(images[0]);
-      } else {
-        this.productsImages[i] = [];
-      }
-      images = [];
-    }
-
-    console.log(this.productsImages);
-  }
-  
-
-  async getProductImages(product_id: number, images: ProductImage[]) {
+  getFirstImageOfProducts(product_id:number) {
     this.productImageService.getProductImages(product_id).subscribe({
       next: (v) => {
-        images = v.body! || [];
+        this.productImages = v.body! || [];
+        console.log(this.productImages);
       },
       error: (e) => {
         console.log(e);
         this.swal.errorMessage(e.error!.message); // show message
       }
     });
+    console.log(this.productImages[0]);
+    return this.productImages[0];
+  
   }
 
   seeMore(){
-    
 
+  }
+  showDetail(gtin: string) {
+    //redirect to product detail
+    // this.router.navigate(['/product/detail'], { queryParams: { gtin: gtin } });
+    console.log(gtin);
+    this.router.navigate([`product/${gtin}`]);
   }
 }

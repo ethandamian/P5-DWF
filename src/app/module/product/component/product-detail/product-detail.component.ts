@@ -7,6 +7,7 @@ import { Category } from '../../_model/category';
 import { ProductComponent } from '../product/product.component';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SwalMessages } from '../../../commons/_dto/swal-message';
+import { Location } from '@angular/common';
 
 declare var $: any;
 
@@ -30,7 +31,8 @@ export class ProductDetailComponent {
     private productService: ProductService,
     private categoryService: CategoryService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) { }
 
   form = this.formBuilder.group({
@@ -135,6 +137,7 @@ export class ProductDetailComponent {
 
         this.form.controls['product'].setValue(product.product);
         this.form.controls['gtin'].setValue(product.gtin);
+        this.form.controls['gtin'].disable();
         this.form.controls['price'].setValue(product.price);
         this.form.controls['stock'].setValue(product.stock);
         this.form.controls['category_id'].setValue(product.category_id);
@@ -150,6 +153,6 @@ export class ProductDetailComponent {
   }
 
   goBack() {
-    this.router.navigate(['/product']);
+    this.location.back();
   }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CategoryService } from '../../_service/category.service';
 import { Category } from '../../_model/category';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -19,6 +20,8 @@ export class CategoryComponent {
   categories: Category[] = [];
 
   categoryToUpdate: number = 0;
+  loggedIn: boolean = false;
+  isAdmin: boolean = false;
 
 
   form = this.formBuilder.group({
@@ -32,12 +35,32 @@ export class CategoryComponent {
 
   swal: SwalMessages = new SwalMessages();
 
-  constructor(private categoryService: CategoryService, private formBuilder: FormBuilder) {
+  constructor(
+    private categoryService: CategoryService, 
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) {
 
 
   }
 
   ngOnInit() {
+    if (localStorage.getItem('token')) {
+      this.loggedIn = true;
+    }else{
+      this.router.navigate(['/']);
+    }
+
+    if (localStorage.getItem('user')) {
+      let user = JSON.parse(localStorage.getItem('user')!);
+      if (user.rol == 'ADMIN') {
+        this.isAdmin = true;
+      } else {
+        this.router.navigate(['/']);
+        this.isAdmin = false;
+      }
+      console.log(this.isAdmin);
+    }
     this.getCategories();
   }
 

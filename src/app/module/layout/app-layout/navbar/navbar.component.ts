@@ -69,5 +69,17 @@ export class NavbarComponent {
     $("#registerModal").modal("show");
   }
 
+  closeRegistrationModal() {
+    $("#registerModal").modal("hide");
+  
+  }
+
+  handleRegistrationSuccess(event: boolean) {
+    if (event) {
+      // Si el registro es exitoso, cierra el modal
+      this.closeRegistrationModal();
+    }
+  }
+
 
 }

@@ -6,7 +6,7 @@ import { LoginComponent } from '../../authentication/login/login.component';
 import { SecuredComponent } from '../../authentication/secured/secured.component';
 import { authenticationGuard } from '../../authentication/_guard/authentication.guard';
 import { ProductDetailComponent } from '../../product/component/product-detail/product-detail.component';
-import { HomeComponent } from '../../../home/home.component';
+import { HomeComponent } from '../../home/home.component';
 import { InvoiceComponent } from '../../invoice/component/invoice/invoice.component';
 import { Product2Component } from '../../product/component/product2/product2.component';
 

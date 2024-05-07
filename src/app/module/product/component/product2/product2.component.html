@@ -11,75 +11,35 @@
 <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-    
-                @for(product of products; track product; let i = $index ) {
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            @if(isAdmin){
-                                <div class="card-body p-4">
-                                    <div class="text-center">
-                                        <!-- Product name-->
-                                        <h5 class="fw-bolder">{{product.product}}</h5>
-                                        <p>Id: {{product.product_id}} </p>
-                                        <p>Gtin: {{product.gtin}}</p>
-                                        <!-- Product price-->
-                                        <p>Price: ${{product.price}}</p>
-                                        <div class="td-status" [ngClass]="{'td-status-enable': product.status == 1, 'td-status-disable': product.status == 0}">
-                                        {{ product.status == 0 ? "Inactive" : "Active" }}
+                @if(products.length == 0){
+                    <div class="text-center">
+                        <h3>No products available</h3>
+                    </div>
+                }@else{
+                    @for(product of products; track product; let i = $index ) {
+                        <div class="col mb-5">
+                            <div class="card h-100">
+                                <!-- Product image-->
+                                <img class="card-img-top" [src]="product.image" alt="..." />
+                                <!-- Product details-->
+                                    <div class="card-body p-4">
+                                        <div class="text-center">
+                                            <!-- Product name-->
+                                            <h5 class="fw-bolder">{{product.product}}</h5>
+                                            <!-- Product price-->
+                                            ${{product.price}}
                                         </div>
-                                        <div class="dropdown">
-
-                                            <!-- dots button  -->
-                                            <button class="dropdown-button card-footer bg-transparent mt-5" id="dropdownMenuButton" data-bs-toggle="dropdown"
-                                              aria-expanded="false">
-                                              <div class="text-center"><a class="btn line mt-auto">Options</a></div>
-                                            </button>
-                          
-                                            <!-- menu options -->
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                              <a class="dropdown-item" (click)="updateProduct(product.gtin)">
-                                                <i class="ph ph-note-pencil icon-text-ul"></i>Edit
-                                              </a>
-                                              <a class="dropdown-item" (click)="showDetail(product.gtin)">
-                                                <i class="ph ph-eye icon-text-ul"></i>More Details
-                                              </a>
-                                              <a class="dropdown-item" (click)="showImageModal(product.product_id)">
-                                                <i class="ph ph-images"></i> See product images
-                                              </a>
-                                              <a *ngIf="product.status == 0" class="dropdown-item enable-item"
-                                                (click)="enableProduct(product.product_id)">
-                                                <i class="ph ph-check-circle icon-text-ul"></i>Activate
-                                              </a>
-                                              <a *ngIf="product.status == 1" class="dropdown-item disable-item"
-                                                (click)="disableProduct(product.product_id)">
-                                                <i class="ph ph-x-circle icon-text-ul"></i>Disable
-                                              </a>
-                                            </div>
-                                          </div>
                                     </div>
-                                </div>
-                            }@else {
-                                <div class="card-body p-4">
-                                    <div class="text-center">
-                                        <!-- Product name-->
-                                        <h5 class="fw-bolder">{{product.product}}</h5>
-                                        <!-- Product price-->
-                                        ${{product.price}}
-                                    </div>
-                                </div>
+                                
                                 <!-- Product actions-->
                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center"><a class="btn btn-outline mt-auto" href="#">View options</a></div>
+                                    
+                                    <div class="add-cart-container"><a class="btn btn-cart btn-outline" href="#"><i class="ph ph-shopping-bag"></i> <span>Add to cart</span></a></div>
                                 </div>
-                            }
-                            
-                            
+                            </div>
                         </div>
-                    </div>
-                    }
+                        }
+                }
             </div>
         </div>
         

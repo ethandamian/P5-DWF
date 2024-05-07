@@ -68,7 +68,7 @@ export class Product2Component {
       if(params['categoryId']){
         const categoryId = params['categoryId'];
         this.getProductsByCategory(categoryId);
-        console.log(categoryId);
+        console.log(this.products);
       }else{
         this.getProducts();
         this.getActiveCategories();
@@ -143,6 +143,7 @@ export class Product2Component {
     this.productService.getProducts().subscribe({
       next: (v) => {
         this.products = v.body!;
+        console.log(this.products);
       },
       error: (e) => {
         console.log(e);
