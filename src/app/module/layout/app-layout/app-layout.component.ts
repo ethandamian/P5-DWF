@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrl: './app-layout.component.css'
 })
 export class AppLayoutComponent {
+  cart: boolean = false;
+
+  recieveCart(event: boolean){
+    if(event){
+      this.cart = true;
+    }
+  }
 
 }

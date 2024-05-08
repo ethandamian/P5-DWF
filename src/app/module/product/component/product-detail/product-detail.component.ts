@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../_service/product.service';
 import { CategoryService } from '../../_service/category.service';
@@ -8,6 +8,9 @@ import { ProductComponent } from '../product/product.component';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SwalMessages } from '../../../commons/_dto/swal-message';
 import { Location } from '@angular/common';
+import { ProductImage } from '../../_model/product-image';
+import { Cart } from '../../../invoice/_model/cart';
+import { CartService } from '../../../invoice/_service/cart.service';
 
 declare var $: any;
 
@@ -18,6 +21,9 @@ declare var $: any;
 })
 export class ProductDetailComponent {
 
+  @Output() productAdded = new EventEmitter<boolean>();
+
+
   gtin = '0';
   product: any = {};
   category: any = {};
@@ -25,6 +31,10 @@ export class ProductDetailComponent {
   submitted = false;
   swal: SwalMessages = new SwalMessages();
   id = 0;
+  productImages: ProductImage[] = []; // product images
+  loggedIn: boolean = false;
+  isAdmin: boolean = false;
+  productQuantity: number = 1;
 
   constructor(
     private rutaActiva: ActivatedRoute,
@@ -32,7 +42,8 @@ export class ProductDetailComponent {
     private categoryService: CategoryService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private cartService: CartService
   ) { }
 
   form = this.formBuilder.group({
@@ -78,6 +89,25 @@ export class ProductDetailComponent {
       }
 
     })
+
+    if (localStorage.getItem('token')) {
+      this.loggedIn = true;
+    }
+    if (localStorage.getItem('user')) {
+      let user = JSON.parse(localStorage.getItem('user')!);
+      if (user.rol == 'ADMIN') {
+        this.isAdmin = true;
+      } else {
+        this.isAdmin = false;
+      }
+      console.log(this.isAdmin);
+    }
+    this.getProductImages();
+  }
+
+
+  getProductImages() {
+    throw new Error('Method not implemented.');
   }
 
   getProduct() {
@@ -154,5 +184,34 @@ export class ProductDetailComponent {
 
   goBack() {
     this.location.back();
+  }
+
+  quantityUp() {
+    this.productQuantity++;
+  }
+
+  quantityDown() {
+    if (this.productQuantity > 1) {
+      this.productQuantity--;
+    }
+  }
+
+  addToCart(){
+    let cart = {
+      gtin: this.gtin,
+      quantity: this.productQuantity
+    }
+
+    this.cartService.addToCart(cart).subscribe({
+      next: (v) => {
+        let text = this.productQuantity > 1? "Products added to cart" : "Product added to cart";  
+        this.swal.successMessage(text);
+        this.productAdded.emit(true);
+      },
+      error: (e) => {
+        this.swal.errorMessage(e.error!.message);
+      }
+    });
+
   }
 }

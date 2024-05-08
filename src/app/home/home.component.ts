@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { DtoProductList } from '../product/_dto/dto-product-list';
-import { ProductService } from '../product/_service/product.service';
-import { SwalMessages } from '../commons/_dto/swal-message';
-import { ProductImageService } from '../product/_service/product-image.service';
-import { ProductImage } from '../product/_model/product-image';
+import { DtoProductList } from '../module/product/_dto/dto-product-list';
+import { ProductService } from '../module/product/_service/product.service';
+import { SwalMessages } from '../module/commons/_dto/swal-message';
+import { ProductImageService } from '../module/product/_service/product-image.service';
+import { ProductImage } from '../module/product/_model/product-image';
 import { Router } from '@angular/router';
-import { Product } from '../product/_model/product';
+import { Product } from '../module/product/_model/product';
 
 @Component({
   selector: 'app-home',

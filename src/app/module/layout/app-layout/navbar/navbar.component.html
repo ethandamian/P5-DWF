@@ -41,6 +41,10 @@
             @if(loggedIn){
             <a class="nav-link" routerLink="#" role="button">
                 <i class="ph ph-shopping-bag"></i>
+                @if(cartQuantity > 0){
+                    <span class="badge">{{cartQuantity}}</span>
+
+                }
             </a>
             }@else{
             <ul class="navbar-nav">

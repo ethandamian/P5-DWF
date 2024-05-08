@@ -3,6 +3,7 @@ import { Category } from '../../../product/_model/category';
 import { SwalMessages } from '../../../commons/_dto/swal-message';
 import { CategoryService } from '../../../product/_service/category.service';
 import { AuthenticationService } from '../../../authentication/_service/authentication.service';
+import { CartService } from '../../../invoice/_service/cart.service';
 
 declare var $: any;
 
@@ -19,9 +20,12 @@ export class NavbarComponent {
 
   swal: SwalMessages = new SwalMessages();
 
+  cartQuantity: number = 0;
+
   constructor(
     private categoryService: CategoryService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private cartService: CartService
   ) { }
 
   ngOnInit() {
@@ -36,6 +40,8 @@ export class NavbarComponent {
         this.isAdmin = true;
       } else {
         this.isAdmin = false;
+        this.getCartQuantity();
+
       }
       console.log(this.isAdmin);
     }
@@ -80,6 +86,18 @@ export class NavbarComponent {
       this.closeRegistrationModal();
     }
   }
+
+  getCartQuantity(){
+    this.cartService.getCart().subscribe({
+      next: (v) => {
+        this.cartQuantity = v.body!.reduce((acumulador, cart) => acumulador + cart.quantity, 0);
+      },
+      error: (e) => {
+        console.error(e);
+      }
+    });
+  }
+  
 
 
 }

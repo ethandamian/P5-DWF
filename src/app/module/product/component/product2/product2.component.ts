@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SwalMessages } from '../../../commons/_dto/swal-message';
 import { ProductService } from '../../_service/product.service';

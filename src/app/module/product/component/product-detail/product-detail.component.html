@@ -1,47 +1,117 @@
 <div class="container">
-  
-    <div class="row">
-      <div class="title">
-        <button class="btn btn-back" (click)="goBack()">
-          <i class="ph ph-arrow-left"></i>
-          <span> Go back</span>
-        </button>
-        <h1 class="title">{{product.product}}</h1>
-
-      </div>
-      <div class="col-md-6">
-        <div class="mb-3">
-          <label class="details-label" for="gtin">GTIN </label>
-          <p  class="paragraph">{{product.gtin}}</p>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="mb-3">
-          <label class="details-label " for="price">Price</label>
-          <p class="paragraph">$ {{product.price}}</p>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="mb-3">
-          <label class="details-label" for="stock">Product stock</label>
-          <p class="stock paragraph">{{product.stock}}</p>
-
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="mb-3">
-          <label class="details-label" for="category_id">Category</label>
-          <p class="paragraph">{{category}}</p>
-        </div>
-      </div>
-      <div class="mb-3">
-        <label class="details-label" for="description">Product description</label>
-        <p class="paragraph">{{product.description}}</p>
-      </div>
-    </div>
-  <button class="btn" (click)="editarProducto()">
-    <i class="ph ph-note-pencil icon-text-ul"></i> Edit
+  <button class="btn btn-back" (click)="goBack()">
+    <i class="ph ph-arrow-left"></i>
+    <span> Go back</span>
   </button>
+
+    <section class="card carousel-container">
+      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-100" src="https://dummyimage.com/600x400/000/fff&text=Primero" alt="First slide">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="https://dummyimage.com/600x400/000/fff&text=Segundo" alt="Second slide">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="https://dummyimage.com/600x400/000/fff&text=Tercero" alt="Third slide">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+
+    </section>
+    
+    <section class="card product-info-container">
+      <div class="row">
+        <div class="title">
+          
+          <h1 class="title">{{product.product}}</h1>
+          
+        </div>
+        <div class="mb-3">
+          @if(isAdmin){
+
+            <label class="details-label"  for="description">Product description</label>
+          }
+          <p class="paragraph">{{product.description}}</p>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            @if(isAdmin){
+
+              <label class="details-label " for="price">Price</label>
+            }
+            <p class=" product-price">$ {{product.price}}</p>
+          </div>
+        </div>
+        @if(isAdmin){
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="details-label" for="gtin">GTIN </label>
+              <p  class="paragraph">{{product.gtin}}</p>
+            </div>
+          </div>
+
+        }
+        <!-- <div class="col-md-6">
+          <div class="mb-3">
+            <label class="details-label" for="stock">Product stock</label>
+            <p class="stock paragraph">{{product.stock}}</p>
+  
+          </div>
+        </div> -->
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="details-label" for="category_id">Category</label>
+            <p class="paragraph">{{category}}</p>
+          </div>
+        </div>
+
+        @if(!isAdmin){
+          <div class=" col-md-6 quantity-selector-container card">
+            <div class=" quantity-selector">
+  
+              <button (click)="quantityDown()"><i class="ph ph-minus"></i></button>
+              <input clas="quantity-input" type="text" min="0" value="{{productQuantity}}" disabled>
+              <button (click)="quantityUp()"><i class="ph ph-plus"></i></button>
+  
+            </div>
+          </div>
+          
+          <div class="col-md-6 shopping-cart-button-container">
+  
+              <button class="col-md-6 btn shopping-cart-button" (click)="addToCart()">
+                  <i class="ph ph-shopping-cart icon-text-ul"></i>
+                  <span>Add to cart</span> 
+    
+              </button>
+          </div>
+          
+        }@else {
+          <button class="btn" (click)="editarProducto()">
+            <i class="ph ph-note-pencil icon-text-ul"></i> Edit
+          </button> 
+        }
+
+      </div>
+
+      
+
+    </section>
 </div>
 
 
