@@ -88,23 +88,26 @@
         </div>
 
         @if(!isAdmin){
-          <div class=" col-md-6 quantity-selector-container card">
-            <div class=" quantity-selector">
-  
-              <button (click)="quantityDown()"><i class="ph ph-minus"></i></button>
-              <input clas="quantity-input" type="text" min="0" value="{{productQuantity}}" disabled>
-              <button (click)="quantityUp()"><i class="ph ph-plus"></i></button>
-  
-            </div>
-          </div>
-          
-          <div class="col-md-6 shopping-cart-button-container">
-  
-              <button class="col-md-6 btn shopping-cart-button" (click)="addToCart()">
-                  <i class="ph ph-shopping-bag icon-text-ul"></i>
-                  <span>Add to cart</span> 
+
+          <div class="btn-cont mt-5">
+            <div class=" col-md-6 quantity-selector-container card mt-2">
+              <div class=" quantity-selector">
     
-              </button>
+                <button (click)="quantityDown()"><i class="ph ph-minus"></i></button>
+                <input class="quantity-input" type="text" min="0" value="{{productQuantity}}" disabled>
+                <button (click)="quantityUp()"><i class="ph ph-plus"></i></button>
+    
+              </div>
+            </div>
+            
+            <div class="col-md-6 shopping-cart-button-container mt-2">
+    
+                <button class="col-md-6 btn shopping-cart-button" (click)="addToCart()">
+                    <i class="ph ph-shopping-bag icon-text-ul"></i>
+                    <span>Add to cart</span> 
+      
+                </button>
+            </div>
           </div>
           
         }@else {

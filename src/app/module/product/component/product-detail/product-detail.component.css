@@ -72,18 +72,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white;
+  background-color: rgb(57, 56, 56);
   width: 180px;
   height: 50px;
   margin-right: 1rem;
+  border-radius: 10px;
 
   & .quantity-selector button {
     padding: 5px 10px;
     font-size: 16px;
-    background-color: #f0f0f0;
+    background-color: rgb(57, 56, 56);
     border: 1px solid #ddd;
     border-radius: 50%;
     cursor: pointer;
+    color: white;
   }
 
   & .quantity-selector button:hover {
@@ -102,7 +104,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 400px;
+  width: 300px;
 
   & .shopping-cart-button {
     width: 100%;
@@ -140,3 +142,13 @@
 input[type="file"] {
   display: none;
 }
+
+.btn-cont {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  /*Center the items*/
+  justify-content: center;
+}
+
+
