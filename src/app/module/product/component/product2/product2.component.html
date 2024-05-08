@@ -9,6 +9,10 @@
 
 <!-- Section-->
 <section class="py-5">
+    <button class="btn btn-back" (click)="goBack()">
+        <i class="ph ph-arrow-left"></i>
+        <span> Go back</span>
+    </button>
     @if(isAdmin){
         <div class="align-button text-center">
             <button type="button" class="btn btn-dark" (click)="showModalForm()">

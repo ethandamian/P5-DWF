@@ -11,6 +11,7 @@ import { ProductImageService } from '../../_service/product-image.service';
 import { ProductImage } from '../../_model/product-image';
 import { NgxPhotoEditorService } from 'ngx-photo-editor';
 import { CartService } from '../../../invoice/_service/cart.service';
+import { Location } from '@angular/common';
 
 declare var $: any; // JQuery
 
@@ -54,7 +55,8 @@ export class Product2Component {
     private route: ActivatedRoute,
     private productImageService: ProductImageService,
     private ngxService: NgxPhotoEditorService,
-    private cartService: CartService
+    private cartService: CartService,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -335,5 +337,9 @@ export class Product2Component {
       }
     });
 
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

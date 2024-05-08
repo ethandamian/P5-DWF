@@ -54,3 +54,9 @@
   right: 0;
   margin-right: 10%;
 }
+
+.btn-back {
+  position: absolute;
+  top: 150px;
+  left: 10%;
+}
