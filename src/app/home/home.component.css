@@ -10,6 +10,10 @@
   background-repeat: no-repeat;
 }
 
+.product-img {
+  cursor: pointer;
+}
+
 .slogan {
   font-size: 2rem;
   padding-top: 50px;
@@ -42,7 +46,7 @@
 }
 
 .card {
-  cursor: pointer;
+  padding: 1rem;
 }
 
 .btn.btn-cart {
@@ -60,6 +64,6 @@
 
 .ph-shopping-bag {
   position: absolute;
-  left: 2.5rem;
+  left: 1.5rem;
   top: 0.68rem;
 }

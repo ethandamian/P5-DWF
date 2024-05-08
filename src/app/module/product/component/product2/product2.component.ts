@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ProductImageService } from '../../_service/product-image.service';
 import { ProductImage } from '../../_model/product-image';
 import { NgxPhotoEditorService } from 'ngx-photo-editor';
+import { CartService } from '../../../invoice/_service/cart.service';
 
 declare var $: any; // JQuery
 
@@ -52,7 +53,8 @@ export class Product2Component {
     private router: Router,
     private route: ActivatedRoute,
     private productImageService: ProductImageService,
-    private ngxService: NgxPhotoEditorService
+    private ngxService: NgxPhotoEditorService,
+    private cartService: CartService
   ) { }
 
   ngOnInit() {
@@ -223,6 +225,7 @@ export class Product2Component {
   showDetail(gtin: string) {
     //redirect to product detail
     // this.router.navigate(['/product/detail'], { queryParams: { gtin: gtin } });
+    console.log(gtin);
     this.router.navigate([`product/${gtin}`]);
   }
 
@@ -315,5 +318,22 @@ export class Product2Component {
         this.swal.errorMessage(e.error!.message); // show message
       }
     });
+  }
+
+  addToCart(gtin: string) {
+    let cart = {
+      gtin: gtin,
+      quantity: 1
+    }
+
+    this.cartService.addToCart(cart).subscribe({
+      next: (v) => {  
+        this.swal.successMessage("Product added to cart");
+      },
+      error: (e) => {
+        this.swal.errorMessage(e.error!.message);
+      }
+    });
+
   }
 }

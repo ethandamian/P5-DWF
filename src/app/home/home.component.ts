@@ -6,6 +6,7 @@ import { ProductImageService } from '../module/product/_service/product-image.se
 import { ProductImage } from '../module/product/_model/product-image';
 import { Router } from '@angular/router';
 import { Product } from '../module/product/_model/product';
+import { CartService } from '../module/invoice/_service/cart.service';
 
 @Component({
   selector: 'app-home',
@@ -27,6 +28,7 @@ export class HomeComponent {
     private router: Router,
     private productService: ProductService,
     private productImageService: ProductImageService,
+    private cartService: CartService
   ) {}
 
   ngOnInit() {
@@ -85,5 +87,22 @@ export class HomeComponent {
     // this.router.navigate(['/product/detail'], { queryParams: { gtin: gtin } });
     console.log(gtin);
     this.router.navigate([`product/${gtin}`]);
+  }
+
+  addToCart(gtin: string) {
+    let cart = {
+      gtin: gtin,
+      quantity: 1
+    }
+
+    this.cartService.addToCart(cart).subscribe({
+      next: (v) => {  
+        this.swal.successMessage("Product added to cart");
+      },
+      error: (e) => {
+        this.swal.errorMessage(e.error!.message);
+      }
+    });
+
   }
 }

@@ -33,11 +33,10 @@
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
     
                 @for(product of products; track product; let i = $index ) {
-                    <div class="col mb-5">
-                        <div class="card h-100" (click)="showDetail(product.gtin)">
+                    <div class="col mb-5" >
+                        <div class=" card h-100" >
                             <!-- Product image-->
-                            <img class="card-img-top" [src]="product.image" alt="..." />
-                            <!--img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." /-->
+                            <img class="card-img-top product-img" [src]="product.image" alt="{{product.product}}" (click)="showDetail(product.gtin)" />
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
@@ -47,13 +46,14 @@
                                     ${{product.price}}
                                 </div>
                             </div>
-                            <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="add-cart-container"><a class="btn btn-cart btn-outline" href="#"><i class="ph ph-shopping-bag"></i> <span>Add to cart</span></a></div>
+                                <div class="add-cart-container"><a class="btn btn-cart btn-outline" (click)="addToCart(product.gtin)"><i class="ph ph-shopping-bag"></i> <span>Add to cart</span></a></div>
                             </div>
                         </div>
+                        <!-- Product actions-->
+                       
                     </div>
-                    }
+                }
             </div>
         </div>
         <div class="text-center boton">
