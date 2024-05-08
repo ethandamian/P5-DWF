@@ -11,6 +11,7 @@ import { Location } from '@angular/common';
 import { ProductImage } from '../../_model/product-image';
 import { Cart } from '../../../invoice/_model/cart';
 import { CartService } from '../../../invoice/_service/cart.service';
+import { ProductImageService } from '../../_service/product-image.service';
 
 declare var $: any;
 
@@ -43,7 +44,8 @@ export class ProductDetailComponent {
     private formBuilder: FormBuilder,
     private router: Router,
     private location: Location,
-    private cartService: CartService
+    private cartService: CartService,
+    private imageService: ProductImageService
   ) { }
 
   form = this.formBuilder.group({
@@ -61,6 +63,7 @@ export class ProductDetailComponent {
     this.product = this.productService.getProduct(this.gtin).subscribe({
       next: (v) => {
         this.product = v.body;
+        this.getProductImages(this.product.product_id);
         this.category = this.categoryService.getCategory(this.product.category_id).subscribe({
           next: (v) => {
             this.category = v.body?.category;
@@ -102,12 +105,20 @@ export class ProductDetailComponent {
       }
       console.log(this.isAdmin);
     }
-    this.getProductImages();
+    
   }
 
 
-  getProductImages() {
-    throw new Error('Method not implemented.');
+  getProductImages(product_id: number) {
+    this.imageService.getProductImages(product_id).subscribe({
+      next: (v) => {
+        this.productImages = v.body!;
+        console.log(this.productImages)
+      },
+      error: (e) => {
+        console.log(e);
+      }
+    })
   }
 
   getProduct() {
