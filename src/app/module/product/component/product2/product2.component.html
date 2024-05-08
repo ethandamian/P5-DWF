@@ -32,10 +32,11 @@
                                     </div>
                                 
                                 <!-- Product actions-->
-                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    
-                                    <div class="add-cart-container"><a class="btn btn-cart btn-outline" (click)="addToCart(product.gtin)"><i class="ph ph-shopping-bag"></i> <span>Add to cart</span></a></div>
-                                </div>
+                                @if(!isAdmin){
+                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                        <div class="add-cart-container"><a class="btn btn-cart btn-outline" (click)="addToCart(product.gtin)"><i class="ph ph-shopping-bag"></i> <span>Add to cart</span></a></div>
+                                    </div>
+                                }
                             </div>
                         </div>
                         }
