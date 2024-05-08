@@ -13,9 +13,9 @@
         </div>
         <div class="carousel-inner">
           @for(image of productImages; track image){
-          <div class="carousel-item active">
-            <img class="d-block w-100" src="{{image.image}}" alt="First slide">
-          </div>
+            <div class="carousel-item active">
+              <img class="d-block w-100" src="{{image.image}}" alt="First slide">
+            </div>
           }
 
           <!-- <div class="carousel-item active">
@@ -110,6 +110,9 @@
         }@else {
           <button class="btn" (click)="editarProducto()">
             <i class="ph ph-note-pencil icon-text-ul"></i> Edit
+          </button> 
+          <button class="btn mt-2" (click)="editarProducto()">
+            <i class="ph ph-note-pencil icon-text-ul"></i> Add image
           </button> 
         }
 
