@@ -45,3 +45,12 @@
   left: 1.5rem;
   top: 0.68rem;
 }
+
+.align-button {
+  /*position: absolute;
+  right: 20%;*/
+  position: fixed;
+  top: 170px;
+  right: 0;
+  margin-right: 10%;
+}
