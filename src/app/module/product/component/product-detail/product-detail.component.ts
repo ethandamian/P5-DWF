@@ -12,6 +12,7 @@ import { ProductImage } from '../../_model/product-image';
 import { Cart } from '../../../invoice/_model/cart';
 import { CartService } from '../../../invoice/_service/cart.service';
 import { ProductImageService } from '../../_service/product-image.service';
+import { NgxPhotoEditorService } from 'ngx-photo-editor';
 
 declare var $: any;
 
@@ -45,7 +46,8 @@ export class ProductDetailComponent {
     private router: Router,
     private location: Location,
     private cartService: CartService,
-    private imageService: ProductImageService
+    private imageService: ProductImageService,
+    private ngxService: NgxPhotoEditorService
   ) { }
 
   form = this.formBuilder.group({
@@ -224,5 +226,36 @@ export class ProductDetailComponent {
       }
     });
 
+  }
+
+  newImage($event: any) {
+    this.ngxService.open($event, {
+      aspectRatio: 4 / 3,
+      autoCropArea: 1
+    }).subscribe((data) => {
+      console.log(data.base64)
+      this.createProductImage(data.base64!);
+    })
+  }
+
+  createProductImage(image: string) {
+    let productImage = new ProductImage();
+    productImage.product_id = this.product.product_id;
+    productImage.image = image;
+    this.imageService.createProductImage(productImage).subscribe({
+      next: (v) => {
+        this.swal.successMessage("Image created"); // show message
+        this.getProductImages(this.product.product_id); // reload images
+      },
+      error: (e) => {
+        console.error(e);
+        this.swal.errorMessage(e.error!.message); // show message
+      }
+    });
+  }
+
+  showImageModal() {
+    this.getProductImages(this.product.product_id)
+    $("#modalImages").modal("show");
   }
 }

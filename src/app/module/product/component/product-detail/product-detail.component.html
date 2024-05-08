@@ -14,7 +14,7 @@
         <div class="carousel-inner">
           @for(image of productImages; track image){
             <div class="carousel-item active">
-              <img class="d-block w-100" src="{{image.image}}" alt="First slide">
+              <img class="d-block w-100" src="{{image.image}}" alt="Product image">
             </div>
           }
 
@@ -111,8 +111,8 @@
           <button class="btn" (click)="editarProducto()">
             <i class="ph ph-note-pencil icon-text-ul"></i> Edit
           </button> 
-          <button class="btn mt-2" (click)="editarProducto()">
-            <i class="ph ph-note-pencil icon-text-ul"></i> Add image
+          <button class="btn mt-2" (click)="showImageModal()">
+            <i class="ph ph-plus"></i> Add image
           </button> 
         }
 
@@ -240,6 +240,40 @@
 
         </form>
 
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Images Modal -->
+<div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="modalImages">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content size-body">
+      <div class="modal-header">
+        <h5 class="modal-title">Product Images</h5>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <section class="images-container">
+          <div *ngIf="productImages.length > 0; else noImages">
+            <div class="product-images-container">
+              @for(image of productImages; track image){
+              <img [src]="image.image" alt="Product Image" class="img-fluid product-img" style="margin-bottom: 10px;">
+
+              }
+            </div>
+
+          </div>
+          <ng-template #noImages>
+            <p class="no-images-text">No images available for this product.</p>
+          </ng-template>
+        </section>
+        <label for="file-upload" class="btn new-image-btn ">
+          New Image
+        </label>
+        <input id="file-upload" type="file" (change)="newImage($event)" />
       </div>
     </div>
   </div>
