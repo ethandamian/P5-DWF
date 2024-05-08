@@ -57,6 +57,13 @@
 
 .btn-back {
   position: absolute;
-  top: 150px;
+  top: 170px;
   left: 10%;
+  background-color:#685c9e;
+}
+
+.footer {
+  position:absolute;
+  bottom: 0;
+  width: 100%;
 }
