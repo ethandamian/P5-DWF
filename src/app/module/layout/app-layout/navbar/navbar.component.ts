@@ -62,6 +62,7 @@ export class NavbarComponent {
       next: (v) => {
         console.log(v)
         this.cartQuantity = v;
+        console.log(this.cartQuantity);
       },
       error: (e) => {
         console.error(e);

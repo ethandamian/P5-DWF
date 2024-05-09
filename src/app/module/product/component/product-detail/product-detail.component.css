@@ -57,6 +57,12 @@
   width: 50%;
   height: 70%;
 
+  & .carousel {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
   & .carousel-inner {
     padding: 1rem;
   }
@@ -78,6 +84,16 @@
   margin-right: 1rem;
   border-radius: 10px;
 
+  & .quantity-input {
+    width: 50px;
+    text-align: center;
+    color: black;
+    margin: 0rem 0.5rem;
+    background-color: white;
+    border-color: white;
+    border-radius: 0.5rem;
+  }
+
   & .quantity-selector button {
     padding: 5px 10px;
     font-size: 16px;
@@ -90,13 +106,6 @@
 
   & .quantity-selector button:hover {
     border-color: #554b83;
-  }
-
-  & .quantity-selector input {
-    width: 50px;
-    text-align: center;
-    color: black;
-    margin: 0rem 0.5rem;
   }
 }
 
@@ -151,4 +160,12 @@ input[type="file"] {
   justify-content: center;
 }
 
+.admin-buttons-container {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-evenly;
 
+  & .admin-button {
+    width: 40%;
+  }
+}

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../_service/product.service';
 import { CategoryService } from '../../_service/category.service';
@@ -23,7 +23,6 @@ declare var $: any;
 })
 export class ProductDetailComponent {
 
-  @Output() productAdded = new EventEmitter<boolean>();
 
 
   gtin = '0';
@@ -219,7 +218,6 @@ export class ProductDetailComponent {
       next: (v) => {
         let text = this.productQuantity > 1? "Products added to cart" : "Product added to cart";  
         this.swal.successMessage(text);
-        this.productAdded.emit(true);
         this.cartService.getCount();
       },
       error: (e) => {
