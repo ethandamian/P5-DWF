@@ -76,6 +76,7 @@ export class CategoryComponent {
         this.categoryService.disableCategory(id).subscribe({
           next: (v) => {
             this.swal.successMessage("The caregory has been disabled"); // show message
+            this.categoryService.fetchCategories();
             this.getCategories(); // reload regions
           },
           error: (e) => {
@@ -101,6 +102,7 @@ export class CategoryComponent {
         this.categoryService.enableCategory(id).subscribe({
           next: (v) => {
             this.swal.successMessage(v.body!.message); // show message
+            this.categoryService.fetchCategories();
             this.getCategories(); // reload regions
           },
           error: (e) => {
