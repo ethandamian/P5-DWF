@@ -132,10 +132,6 @@ export class CategoryComponent {
 
   }
 
-
-
-
-
   onSubmit() {
     this.submitted = true;
     if (this.form.invalid) return;
@@ -152,6 +148,7 @@ export class CategoryComponent {
     this.categoryService.createCategory(this.form.value).subscribe({
       next: (v) => {
         this.swal.successMessage("The category has been added successfully!"); // show message
+        this.categoryService.fetchCategories();
         this.getCategories(); // reload regions
         this.hideModal(); // close modal
       },
@@ -166,8 +163,9 @@ export class CategoryComponent {
     this.categoryService.updateCategory(this.form.value, this.categoryToUpdate).subscribe({
       next: (v) => {
         this.swal.successMessage("The categody has been updated succesfully!"); // show message
+        this.categoryService.fetchCategories();
         this.getCategories(); // reload regions
-        this.hideModal(); // close modal
+        this.hideModal(); // close modalthis.htt
         this.categoryToUpdate = 0; // reset regionToUpdate
       },
       error: (e) => {

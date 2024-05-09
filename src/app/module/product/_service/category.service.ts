@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Category } from '../_model/category';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { api_dwb_uri } from '../../../shared/uri/api-dwb-uri';
 import { ApiResponse } from '../../commons/_dto/api-response';
 
@@ -12,12 +12,25 @@ import { ApiResponse } from '../../commons/_dto/api-response';
 export class CategoryService {
 
   private source = '/category'
+  private categoriasSubject: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>([]);
 
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient) {
+    this.fetchCategories();
+  }
+
+  fetchCategories():void{
+    this.getActiveCategories().subscribe(res => {
+      this.categoriasSubject.next(res.body!);
+    });
+  }
+
+  getCategoriasObservable(): Observable<Category[]> {
+    return this.categoriasSubject.asObservable();
+  }
 
   createCategory(category: any): Observable<HttpResponse<ApiResponse>> {
     return this.http.post<ApiResponse>(api_dwb_uri + this.source, category, { observe: 'response' });
-
   }
 
   disableCategory(id: number): Observable<HttpResponse<ApiResponse>> {

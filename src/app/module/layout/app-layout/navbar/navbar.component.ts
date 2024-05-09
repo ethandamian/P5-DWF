@@ -47,6 +47,17 @@ export class NavbarComponent {
     }
 
     this.getCategories();
+
+    this.categoryService.getCategoriasObservable().subscribe({
+      next: (v) => {
+        console.log(v)
+        this.categories = v;
+      },
+      error: (e) => {
+        console.log(e);
+      }
+    
+    })
   }
 
   getCategories() {
