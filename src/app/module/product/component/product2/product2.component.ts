@@ -331,6 +331,7 @@ export class Product2Component {
     this.cartService.addToCart(cart).subscribe({
       next: (v) => {  
         this.swal.successMessage("Product added to cart");
+        //this.cartService.getCount();
       },
       error: (e) => {
         this.swal.errorMessage(e.error!.message);

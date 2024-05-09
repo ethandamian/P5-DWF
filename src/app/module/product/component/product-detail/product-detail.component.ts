@@ -220,6 +220,7 @@ export class ProductDetailComponent {
         let text = this.productQuantity > 1? "Products added to cart" : "Product added to cart";  
         this.swal.successMessage(text);
         this.productAdded.emit(true);
+        //this.cartService.getCount();
       },
       error: (e) => {
         this.swal.errorMessage(e.error!.message);
