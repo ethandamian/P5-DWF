@@ -13,19 +13,17 @@ export class CartService {
   private source = "/cart";
   private contadorSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
-  // Temporal
-  private num: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-
   constructor(
     private http: HttpClient
   ) { }
 
-  
-
   getCount():void{
     this.getCart().subscribe(res => {
-      console.log(res)
-      this.contadorSubject.next(res.body?.length!);
+      let n = 0;
+      res.body?.forEach((item) => {
+        n += item.quantity!;
+      });
+      this.contadorSubject.next(n);
     });
   }
 

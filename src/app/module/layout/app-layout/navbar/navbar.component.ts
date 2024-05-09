@@ -58,7 +58,7 @@ export class NavbarComponent {
     
     })
 
-    /*this.cartService.getCountObservable().subscribe({
+    this.cartService.getCountObservable().subscribe({
       next: (v) => {
         console.log(v)
         this.cartQuantity = v;
@@ -66,7 +66,7 @@ export class NavbarComponent {
       error: (e) => {
         console.error(e);
       }
-    })*/
+    })
   }
 
   getCategories() {
