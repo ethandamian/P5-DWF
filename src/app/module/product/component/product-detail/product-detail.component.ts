@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../_service/product.service';
 import { CategoryService } from '../../_service/category.service';
@@ -36,6 +36,10 @@ export class ProductDetailComponent {
   loggedIn: boolean = false;
   isAdmin: boolean = false;
   productQuantity: number = 1;
+
+  mostrarDescripcionCompleta: boolean = false;
+  limiteCaracteres: number = 300; // Establece el límite de caracteres deseado
+
 
   constructor(
     private rutaActiva: ActivatedRoute,
@@ -106,7 +110,7 @@ export class ProductDetailComponent {
       }
       console.log(this.isAdmin);
     }
-    
+
   }
 
 
@@ -179,7 +183,6 @@ export class ProductDetailComponent {
 
         this.form.controls['product'].setValue(product.product);
         this.form.controls['gtin'].setValue(product.gtin);
-        this.form.controls['gtin'].disable();
         this.form.controls['price'].setValue(product.price);
         this.form.controls['stock'].setValue(product.stock);
         this.form.controls['category_id'].setValue(product.category_id);
@@ -208,7 +211,7 @@ export class ProductDetailComponent {
     }
   }
 
-  addToCart(){
+  addToCart() {
     let cart = {
       gtin: this.gtin,
       quantity: this.productQuantity
@@ -216,7 +219,7 @@ export class ProductDetailComponent {
 
     this.cartService.addToCart(cart).subscribe({
       next: (v) => {
-        let text = this.productQuantity > 1? "Products added to cart" : "Product added to cart";  
+        let text = this.productQuantity > 1 ? "Products added to cart" : "Product added to cart";
         this.swal.successMessage(text);
         this.cartService.getCount();
       },
@@ -258,7 +261,7 @@ export class ProductDetailComponent {
     $("#modalImages").modal("show");
   }
 
-  deleteImage(id_image: number){
+  deleteImage(id_image: number) {
 
     this.swal.confirmMessage.fire({
       title: 'Please confirm you want to delete the image',
