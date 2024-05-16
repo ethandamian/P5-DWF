@@ -48,5 +48,4 @@ export class CategoryService {
     return this.http.put<ApiResponse>(api_dwb_uri + this.source + "/" + id, category, { observe: 'response' });
   }
 
-
 }

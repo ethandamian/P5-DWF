@@ -2,22 +2,24 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CategoryComponent } from './module/product/component/category/category.component';
 import { RegisterComponent } from './module/authentication/register/register.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponent } from './module/layout/app-layout/navbar/navbar.component';
 
 import { LoginComponent } from './module/authentication/login/login.component';
 
 import { SecuredComponent } from './module/authentication/secured/secured.component';
 
 import { authenticationGuard } from './module/authentication/_guard/authentication.guard';
+import { AppLayoutComponent } from './module/layout/app-layout/app-layout.component';
 
 const routes: Routes = [
-  { path: '', component: NavbarComponent, children: [
-    { path: 'category', component: CategoryComponent },
-    { path: 'register', component: RegisterComponent },
-    { path: 'login', component: LoginComponent },
-    { path: 'secured', component: SecuredComponent, canActivate: [authenticationGuard] }
-  
-  ]}
+  {
+    path: '',
+    component: AppLayoutComponent,
+    children: [{
+      path: '',
+      loadChildren: () => import('./module/layout/layout.module').then(m => m.LayoutModule)
+    }]
+  }
 ];
 
 @NgModule({

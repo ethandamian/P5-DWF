@@ -32,7 +32,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
     CommonModule,
 
-    AppRoutingModule,
+    //AppRoutingModule,
 
     HttpClientModule,
 
@@ -44,6 +44,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
     HttpClientModule,
 
+  ],
+  exports: [
+    LoginComponent,
+    RegisterComponent
   ]
 
 })
