@@ -16,6 +16,11 @@
           <div class="carousel-inner">
             <div *ngFor="let image of productImages; let i = index" class="carousel-item" [class.active]="i === 0">
               <img class="d-block w-100" [src]="image.image" alt="{{image.image}}">
+              @if(isAdmin){
+              <div class="text-center">
+                <button class="btn admin-button mt-3" (click)="deleteImage(image.product_image_id)"><i class="ph ph-trash"></i> Delete image</button>
+              </div>
+              }
             </div>
           </div>
         </div>

@@ -20,5 +20,5 @@ export const AppLayoutRoutes: Routes = [
     { path: 'product', component: Product2Component},
     {path: 'product/:categoryId/:category', component: Product2Component},
     { path: 'product/:gtin', component: ProductDetailComponent },
-    {path: "factura", component:InvoiceComponent}
+    {path: "invoice", component:InvoiceComponent}
 ];

@@ -58,3 +58,13 @@
     font-size: 14px;
     margin-right: 8px;
 }
+
+.btn {
+    background-color: #554b83;
+  }
+
+.btn-back {
+    position: absolute;
+    top: 9rem;
+    left: 10%;
+}

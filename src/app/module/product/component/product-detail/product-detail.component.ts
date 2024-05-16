@@ -257,4 +257,31 @@ export class ProductDetailComponent {
     this.getProductImages(this.product.product_id)
     $("#modalImages").modal("show");
   }
+
+  deleteImage(id_image: number){
+
+    this.swal.confirmMessage.fire({
+      title: 'Please confirm you want to delete the image',
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Confirm',
+      background: "#505050",
+      color: "white",
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+        this.imageService.deleteProductImage(id_image).subscribe({
+          next: (v) => {
+            this.swal.successMessage("The caregory has been disabled"); // show message
+            this.imageService.getProductImages(this.product.product_id);
+            this.getProductImages(this.product.product_id);
+          },
+          error: (e) => {
+            console.error(e);
+            this.swal.errorMessage("Can't delete the image"); // show message
+          }
+        });
+      }
+    });
+  }
 }

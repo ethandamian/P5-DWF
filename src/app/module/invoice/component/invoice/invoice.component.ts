@@ -3,6 +3,7 @@ import { SwalMessages } from '../../../commons/_dto/swal-message';
 import { DtoInvoiceList } from '../../_dto/dto-invoice-list';
 import { InvoiceService } from '../../_service/invoice.service';
 import { CurrencyPipe, DatePipe } from '@angular/common';
+import { Location } from '@angular/common';
 
 declare var $: any; // JQuery
 
@@ -21,6 +22,7 @@ export class InvoiceComponent {
 
   constructor(
     private invoiceService: InvoiceService,
+    private location: Location
   ){}
 
   ngOnInit(){
@@ -37,6 +39,10 @@ export class InvoiceComponent {
         this.swal.errorMessage(e.error!.message); // show message
       }
     });
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
 

@@ -5,6 +5,7 @@ import { Category } from '../../_model/category';
 import { FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { SwalMessages } from '../../../commons/_dto/swal-message';
+import { Location } from '@angular/common';
 
 declare var $: any;
 
@@ -38,7 +39,8 @@ export class CategoryComponent {
   constructor(
     private categoryService: CategoryService, 
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {
 
 
@@ -71,6 +73,8 @@ export class CategoryComponent {
       showCancelButton: true,
       cancelButtonText: 'Cancel',
       confirmButtonText: 'Confirm',
+      background: "#505050",
+      color: "white"
     }).then((result: any) => {
       if (result.isConfirmed) {
         this.categoryService.disableCategory(id).subscribe({
@@ -217,6 +221,10 @@ export class CategoryComponent {
 
   hideModal() {
     $('#categoryFormModal').modal("hide");
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 

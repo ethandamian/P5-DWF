@@ -1,11 +1,15 @@
 <section class="bg-dark">
   <div class="card-container">
+    <button class="btn btn-back" (click)="goBack()">
+      <i class="ph ph-arrow-left"></i>
+      <span> Go back</span>
+  </button>
       <div class="card bg-dark">
     <!-- Card header -->
 
     <div class="card-header clearfix">
           <div class="header-container">
-            <h4>Listado de facturas</h4>
+            <h4>List of invoices</h4>
           </div>
     </div>
 
@@ -19,10 +23,10 @@
             <thead>
               <tr class="text-white">
                 <th scope="col">No.</th>
-                <th scope="col">Código</th>
-                <th scope="col">Monto total</th>
-                <th scope="col">Fecha de compra</th>
-                <th scope="col">Más</th>
+                <th scope="col">Code</th>
+                <th scope="col">Total amount</th>
+                <th scope="col">Purchase date</th>
+                <th scope="col">More</th>
               </tr>
             </thead>
             <tbody>
