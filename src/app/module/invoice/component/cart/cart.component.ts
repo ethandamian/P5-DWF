@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { CartService } from '../../_service/cart.service';
+import { InvoiceService } from '../../_service/invoice.service';
 import { DtoCartDetails } from '../../_dto/dto-cart-details';
-import Swal from 'sweetalert2';
 import { SwalMessages } from '../../../commons/_dto/swal-message';
+
+declare var $: any;
+
 
 @Component({
   selector: 'app-cart',
@@ -19,6 +22,7 @@ export class CartComponent {
   constructor(
     private location: Location,
     private cartService: CartService,
+    private invoiceService: InvoiceService,
   ) { }
 
   ngOnInit() {
@@ -89,6 +93,55 @@ export class CartComponent {
             console.log(e);
           }
         });
+      }
+    });
+  }
+
+  total(): number{
+    let total = 0;
+    for(let element of this.cart){
+      total += element.product.price! * element.quantity!;
+    }
+    return total;
+  }
+
+  showModal() {
+    $('#checkoutModal').modal("show");
+    $("#checkout-form-title").text("New Category");
+    $("#modal-button").text("Add");
+  }
+
+  totalProducts(){
+    let total = 0;
+    for(let element of this.cart){
+      total += element.quantity!;
+    }
+    return total;
+  }
+
+  finish(){
+    this.swal.confirmMessage.fire({
+      title: 'Are you sure to complete the purchase?',
+      icon: 'question',
+      background: '#4d425f',
+      color: 'white',
+      showCancelButton: true,
+      showConfirmButton: true,
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Confirm',
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+        this.invoiceService.generateInvoice().subscribe(
+          (res) => {
+            this.swal.successMessage('Invoice generated successfully');
+            this.cartService.clearCart();
+            this.cartService.getCount();
+            this.getCart();
+          },
+          (err) => {
+            this.swal.errorMessage('Error generating invoice');
+          }
+        )
       }
     });
   }

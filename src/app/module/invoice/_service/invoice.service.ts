@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Invoice } from '../_model/invoice';
 import { api_dwb_uri } from '../../../shared/uri/api-dwb-uri';
 import { DtoInvoiceList } from '../_dto/dto-invoice-list';
+import { ApiResponse } from '../../commons/_dto/api-response';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,7 @@ export class InvoiceService {
   }
 
   /* REQUERIMIENTO 4. Implementar servicio Invoice - función generateInvoice() */
-  generateInvoice() {}
+  generateInvoice(): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(api_dwb_uri + this.source, { observe: 'response' });
+  }
 }

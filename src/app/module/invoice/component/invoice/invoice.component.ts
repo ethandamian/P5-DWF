@@ -2,7 +2,6 @@ import { Component, isStandalone } from '@angular/core';
 import { SwalMessages } from '../../../commons/_dto/swal-message';
 import { DtoInvoiceList } from '../../_dto/dto-invoice-list';
 import { InvoiceService } from '../../_service/invoice.service';
-import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Location } from '@angular/common';
 
 declare var $: any; // JQuery
@@ -10,8 +9,7 @@ declare var $: any; // JQuery
 @Component({
   selector: 'app-invoice',
   templateUrl: './invoice.component.html',
-  styleUrl: './invoice.component.css',
-  providers: [DatePipe, CurrencyPipe]
+  styleUrl: './invoice.component.css'
 })
 
 export class InvoiceComponent {

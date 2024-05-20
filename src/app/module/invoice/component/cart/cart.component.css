@@ -101,6 +101,7 @@
 
 .size-body {
     height: fit-content;
+    min-width: 1000px;
 }
 
 /* ul dropdown  */
@@ -188,3 +189,12 @@
     display: inline;
 }
 
+label{
+    font-weight: bold;
+}
+
+.modal-size{
+    width: 100%;
+    max-width: 1000px;
+    min-width: 1000px;
+}
