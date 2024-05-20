@@ -12,6 +12,8 @@ import { ProductImage } from '../../_model/product-image';
 import { NgxPhotoEditorService } from 'ngx-photo-editor';
 import { CartService } from '../../../invoice/_service/cart.service';
 import { Location } from '@angular/common';
+import { forkJoin } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 declare var $: any; // JQuery
 
@@ -32,6 +34,9 @@ export class Product2Component {
   categoryShowing: string="";
 
   categories: Category[] = []; // category list
+
+  loaded: boolean = false;
+  count: number = 0;
 
   // Product form
   form = this.formBuilder.group({
@@ -73,6 +78,7 @@ export class Product2Component {
         const categoryId = params['categoryId'];
         this.getProductsByCategory(categoryId);
         console.log(this.products);
+        this.loaded = true;
       }else{
         this.getProducts();
         this.getActiveCategories();
@@ -83,6 +89,30 @@ export class Product2Component {
       }
   })
     
+  }
+
+  getImages() {
+    let arr: DtoProductList[] = [];
+    let observables = this.products.map(product => 
+      this.productImageService.getProductImages(product.product_id).pipe(
+        map(v => (arr.push ({
+          ...product,
+          image: v.body?.at(0)?.image ?? ""
+        })))
+      )
+    );
+  
+    forkJoin(observables).subscribe({
+      next: (results) => {
+        this.products = arr;
+        console.log(arr);
+        this.loaded = true;
+      },
+      error: (e) => {
+        console.log(e);
+        this.swal.errorMessage(e.error!.message); // show message
+      }
+    });
   }
 
   disableProduct(id: number) {
@@ -144,10 +174,11 @@ export class Product2Component {
   }
 
   getProducts() {
-    this.productService.getProducts().subscribe({
+    this.productService.getActiveProducts().subscribe({
       next: (v) => {
         this.products = v.body!;
         console.log(this.products);
+        this.getImages();
       },
       error: (e) => {
         console.log(e);

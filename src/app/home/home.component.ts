@@ -80,8 +80,9 @@ export class HomeComponent {
   }
 
   seeMore(){
-
+    this.router.navigate(['/product'])
   }
+
   showDetail(gtin: string) {
     //redirect to product detail
     // this.router.navigate(['/product/detail'], { queryParams: { gtin: gtin } });

@@ -6,60 +6,58 @@
     }
 </div>
 
-
-<!-- Section-->
+@if(loaded){
+  <!-- Section-->
 <section class="py-5">
-    <button class="btn btn-back" (click)="goBack()">
-        <i class="ph ph-arrow-left"></i>
-        <span> Go back</span>
-    </button>
-    @if(isAdmin){
-        <div class="align-button text-center">
-            <button type="button" class="btn btn-dark" (click)="showModalForm()">
-            <i class="ph ph-plus"></i>
-            New product
-            </button>
-        </div>
-    }
-    
-        <div class="container px-4 px-lg-5 mt-5">
-            
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                @if(products.length == 0){
-                    <div class="text-center">
-                        <h3>No products available</h3>
-                    </div>
-                }@else{
-                    @for(product of products; track product; let i = $index ) {
-                        <div class="col mb-5">
-                            <div class="card h-100" >
-                                <!-- Product image-->
-                                <img class="card-img-top product-img" [src]="product.image" alt="{{product.product}}" (click)="showDetail(product.gtin)"/>
-                                <!-- Product details-->
-                                    <div class="card-body p-4" (click)="showDetail(product.gtin)">
-                                        <div class="text-center">
-                                            <!-- Product name-->
-                                            <h5 class="fw-bolder">{{product.product}}</h5>
-                                            <!-- Product price-->
-                                            ${{product.price}}
-                                        </div>
-                                    </div>
-                                
-                                <!-- Product actions-->
-                                @if(!isAdmin){
-                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                        <div class="add-cart-container"><a class="btn btn-cart btn-outline" (click)="addToCart(product.gtin)"><i class="ph ph-shopping-bag"></i> <span>Add to cart</span></a></div>
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                        }
-                }
-            </div>
-        </div>
-
-
-    <div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="modalForm">
+  <button class="btn btn-back" (click)="goBack()">
+      <i class="ph ph-arrow-left"></i>
+      <span> Go back</span>
+  </button>
+  @if(isAdmin){
+      <div class="align-button text-center">
+          <button type="button" class="btn btn-dark" (click)="showModalForm()">
+          <i class="ph ph-plus"></i>
+          New product
+          </button>
+      </div>
+  }
+  
+      <div class="container px-4 px-lg-5 mt-5">
+          
+          <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+              @if(products.length == 0){
+                  <div class="text-center">
+                      <h3>No products available</h3>
+                  </div>
+              }@else{
+                  @for(product of products; track product; let i = $index ) {
+                      <div class="col mb-5">
+                          <div class="card h-100" >
+                              <!-- Product image-->
+                              <img class="card-img-top product-img" [src]="product.image" alt="{{product.product}}" (click)="showDetail(product.gtin)"/>
+                              <!-- Product details-->
+                                  <div class="card-body p-4" (click)="showDetail(product.gtin)">
+                                      <div class="text-center">
+                                          <!-- Product name-->
+                                          <h5 class="fw-bolder">{{product.product}}</h5>
+                                          <!-- Product price-->
+                                          ${{product.price}}
+                                      </div>
+                                  </div>
+                              
+                              <!-- Product actions-->
+                              @if(!isAdmin){
+                                  <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                      <div class="add-cart-container"><a class="btn btn-cart btn-outline" (click)="addToCart(product.gtin)"><i class="ph ph-shopping-bag"></i> <span>Add to cart</span></a></div>
+                                  </div>
+                              }
+                          </div>
+                      </div>
+                      }
+              }
+          </div>
+      </div>
+      <div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="modalForm">
         <div class="modal-dialog modal-dialog-centered modal-lg">
           <div class="modal-content size-body">
             <div class="modal-header">
@@ -181,6 +179,11 @@
       </div>
       
 </section>
+
+}
+
+
+
 
 <section>
     <footer class="py-5 bg-dark footer">

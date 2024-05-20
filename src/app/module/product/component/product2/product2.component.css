@@ -65,5 +65,8 @@
 .footer {
   position:absolute;
   bottom: 0;
+  top: 105%;
   width: 100%;
+  margin-top: 0;
 }
+
