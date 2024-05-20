@@ -7,6 +7,7 @@ import { ProductImage } from '../module/product/_model/product-image';
 import { Router } from '@angular/router';
 import { Product } from '../module/product/_model/product';
 import { CartService } from '../module/invoice/_service/cart.service';
+import { forkJoin, map } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -50,6 +51,42 @@ export class HomeComponent {
   }
 
   getProducts() {
+    this.productService.getActiveProducts().subscribe({
+      next: (v) => {
+        this.products = v.body!;
+        this.products = this.products.slice(0,8);
+        this.getImages();
+      },
+      error: (e) => {
+        console.log(e);
+        this.swal.errorMessage(e.error!.message); // show message
+      }
+    });
+  }
+
+  getImages() {
+    let arr: DtoProductList[] = [];
+    let observables = this.products.map(product => 
+      this.productImageService.getProductImages(product.product_id).pipe(
+        map(v => (arr.push ({
+          ...product,
+          image: v.body?.at(0)?.image ?? ""
+        })))
+      )
+    );
+  
+    forkJoin(observables).subscribe({
+      next: (results) => {
+        this.products = arr;
+      },
+      error: (e) => {
+        console.log(e);
+        this.swal.errorMessage(e.error!.message); // show message
+      }
+    });
+  }
+
+  /*getProducts() {
     this.productService.getProductsByCategory(3).subscribe({
       next: (v) => {
         this.products = v.body!;
@@ -61,32 +98,15 @@ export class HomeComponent {
         this.swal.errorMessage(e.error!.message); // show message
       }
     });
-  }
+  }*/
 
-  getFirstImageOfProducts(product_id:number) {
-    this.productImageService.getProductImages(product_id).subscribe({
-      next: (v) => {
-        this.productImages = v.body! || [];
-        console.log(this.productImages);
-      },
-      error: (e) => {
-        console.log(e);
-        this.swal.errorMessage(e.error!.message); // show message
-      }
-    });
-    console.log(this.productImages[0]);
-    return this.productImages[0];
   
-  }
 
   seeMore(){
     this.router.navigate(['/product'])
   }
 
   showDetail(gtin: string) {
-    //redirect to product detail
-    // this.router.navigate(['/product/detail'], { queryParams: { gtin: gtin } });
-    console.log(gtin);
     this.router.navigate([`product/${gtin}`]);
   }
 
