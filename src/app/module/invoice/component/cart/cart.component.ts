@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { CartService } from '../../_service/cart.service';
 import { DtoCartDetails } from '../../_dto/dto-cart-details';
+import Swal from 'sweetalert2';
+import { SwalMessages } from '../../../commons/_dto/swal-message';
 
 @Component({
   selector: 'app-cart',
@@ -11,10 +13,12 @@ import { DtoCartDetails } from '../../_dto/dto-cart-details';
 export class CartComponent {
 
   cart: DtoCartDetails[] = [];
+  swal: SwalMessages = new SwalMessages();
+
 
   constructor(
     private location: Location,
-    private cartService: CartService
+    private cartService: CartService,
   ) { }
 
   ngOnInit() {
@@ -39,24 +43,52 @@ export class CartComponent {
   }
 
   clearCart() {
-    this.cartService.clearCart().subscribe({
-      next: (v) => {
-        this.getCart();
-        this.cartService.getCount();
-      },
-      error: (e) => {
-        console.log(e);
+    this.swal.confirmMessage.fire({
+      title: 'Are you sure you want to delete all the products in the cart?',
+      icon: 'warning',
+      background: '#4d425f',
+      color: 'white',
+      showCancelButton: true,
+      showConfirmButton: true,
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Confirm',
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+        this.cartService.clearCart().subscribe({
+          next: (v) => {
+            this.getCart();
+            this.cartService.getCount();
+          },
+          error: (e) => {
+            console.log(e);
+          }
+        });
       }
     });
+    
   }
 
   removeFromCart(id: number) {
-    this.cartService.removeFromCart(id).subscribe({
-      next: (v) => {
-        this.getCart();
-      },
-      error: (e) => {
-        console.log(e);
+    this.swal.confirmMessage.fire({
+      title: 'Are you sure you want to delete all the products in the cart?',
+      icon: 'warning',
+      background: '#4d425f',
+      color: 'white',
+      showCancelButton: true,
+      showConfirmButton: true,
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Confirm',
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+        this.cartService.removeFromCart(id).subscribe({
+          next: (v) => {
+            this.getCart();
+            this.cartService.getCount();
+          },
+          error: (e) => {
+            console.log(e);
+          }
+        });
       }
     });
   }
