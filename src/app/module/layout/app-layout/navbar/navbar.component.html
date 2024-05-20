@@ -41,7 +41,7 @@
             @if(loggedIn){
             <a class="nav-link" routerLink="#" role="button">
                 @if(!isAdmin){
-                    <i class="ph ph-shopping-bag"></i>
+                    <i class="ph ph-shopping-bag" (click)="goToCart()"></i>
                     @if(cartQuantity > 0){
                         <span class="badge">{{cartQuantity}}</span>
 

@@ -14,9 +14,9 @@
                 </div>
                 <div class="align-button">
 
-                    <button type="button" class="btn btn-dark" >
+                    <button type="button" class="btn btn-dark" (click)="clearCart()" >
                         <i class="ph ph-trash"></i>
-                        Delete all
+                        Clear cart
                     </button>
                 </div>
             </div>
@@ -37,22 +37,22 @@
                     <!-- <tbody *ngFor="let item of categories"> -->
                     <tbody>
                         @for (element of cart; track element){
-                        <tr class="table-default text-white">
-                            <td> 
-                                <div class="text-center">
-                                <img class="img-cart" [src]="element.image" alt="{{element.product.product}}">
-                                </div>
-                            </td>
-                            <td>{{element.product.product}}</td>
-                            <td>{{element.product.price | currency: 'USD'}}</td>
-                            <td>{{element.quantity}}</td>
-                            <td>{{element.quantity * element.product.price | currency: 'USD'}}</td>
-                            <td class="red">
-                                <i class="ph ph-trash"></i>
-                                Delete
-                            </td>
-                        <tr>
-                            }
+                            <tr class="table-default text-white">
+                                <td> 
+                                    <div class="text-center">
+                                    <img class="img-cart" [src]="element.image" alt="{{element.product.product}}">
+                                    </div>
+                                </td>
+                                <td>{{element.product.product}}</td>
+                                <td>{{element.product.price | currency: 'USD'}}</td>
+                                <td>{{element.quantity}}</td>
+                                <td>{{element.quantity * element.product.price | currency: 'USD'}}</td>
+                                <td class="red" (click)="removeFromCart(element.cart_id)">
+                                    <i class="ph ph-trash"></i>
+                                    Delete
+                                </td>
+                            <tr>
+                        }
                     </tbody>
                 </table>
             </div>

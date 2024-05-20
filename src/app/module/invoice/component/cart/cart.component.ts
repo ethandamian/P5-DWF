@@ -37,4 +37,27 @@ export class CartComponent {
   goBack() {
     this.location.back();
   }
+
+  clearCart() {
+    this.cartService.clearCart().subscribe({
+      next: (v) => {
+        this.getCart();
+        this.cartService.getCount();
+      },
+      error: (e) => {
+        console.log(e);
+      }
+    });
+  }
+
+  removeFromCart(id: number) {
+    this.cartService.removeFromCart(id).subscribe({
+      next: (v) => {
+        this.getCart();
+      },
+      error: (e) => {
+        console.log(e);
+      }
+    });
+  }
 }

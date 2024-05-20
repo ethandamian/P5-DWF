@@ -4,6 +4,7 @@ import { SwalMessages } from '../../../commons/_dto/swal-message';
 import { CategoryService } from '../../../product/_service/category.service';
 import { AuthenticationService } from '../../../authentication/_service/authentication.service';
 import { CartService } from '../../../invoice/_service/cart.service';
+import { Router } from '@angular/router';
 
 declare var $: any;
 
@@ -25,7 +26,8 @@ export class NavbarComponent {
   constructor(
     private categoryService: CategoryService,
     private authenticationService: AuthenticationService,
-    private cartService: CartService
+    private cartService: CartService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -117,6 +119,10 @@ export class NavbarComponent {
         console.error(e);
       }
     });
+  }
+
+  goToCart(){
+    this.router.navigate(['/cart']);
   }
   
 
