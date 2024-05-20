@@ -1,0 +1,63 @@
+<section class="bg-dark">
+    
+    <div class="card-container">
+        <button class="btn btn-back" (click)="goBack()">
+            <i class="ph ph-arrow-left"></i>
+            <span> Go back</span>
+        </button>
+        <div class="card bg-dark">
+
+            <div class="card-header clearfix">
+                <div class="header-container">
+                    <h3 class="text-center"><strong>Cart</strong></h3>
+
+                </div>
+                <div class="align-button">
+
+                    <button type="button" class="btn btn-dark" >
+                        <i class="ph ph-trash"></i>
+                        Delete all
+                    </button>
+                </div>
+            </div>
+            <div class=" card-body">
+
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr class="text-white">
+                            <th scope="col">Image</th>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">More</th>
+                        </tr>
+                    </thead>
+                    <!-- <tbody *ngFor="let item of categories"> -->
+                    <tbody>
+                        @for (element of cart; track element){
+                        <tr class="table-default text-white">
+                            <td> 
+                                <div class="text-center">
+                                <img class="img-cart" [src]="element.image" alt="{{element.product.product}}">
+                                </div>
+                            </td>
+                            <td>{{element.product.product}}</td>
+                            <td>{{element.product.price | currency: 'USD'}}</td>
+                            <td>{{element.quantity}}</td>
+                            <td>{{element.quantity * element.product.price | currency: 'USD'}}</td>
+                            <td class="red">
+                                <i class="ph ph-trash"></i>
+                                Delete
+                            </td>
+                        <tr>
+                            }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+
+</section>

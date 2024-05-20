@@ -9,6 +9,7 @@ import { ProductDetailComponent } from '../../product/component/product-detail/p
 import { HomeComponent } from '../../../home/home.component';
 import { InvoiceComponent } from '../../invoice/component/invoice/invoice.component';
 import { Product2Component } from '../../product/component/product2/product2.component';
+import { CartComponent } from '../../invoice/component/cart/cart.component';
 
 
 export const AppLayoutRoutes: Routes = [
@@ -20,5 +21,6 @@ export const AppLayoutRoutes: Routes = [
     { path: 'product', component: Product2Component},
     {path: 'product/:categoryId/:category', component: Product2Component},
     { path: 'product/:gtin', component: ProductDetailComponent },
-    {path: "invoice", component:InvoiceComponent}
+    {path: "invoice", component:InvoiceComponent},
+    {path: "cart", component: CartComponent}
 ];

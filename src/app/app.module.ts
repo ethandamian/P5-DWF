@@ -13,11 +13,13 @@ import { AuthenticationModule } from './module/authentication/authentication.mod
 import { CommonsModule } from './module/commons/commons.module';
 import { NavbarComponent } from './module/layout/app-layout/navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
+import { CartComponent } from './module/invoice/component/cart/cart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
