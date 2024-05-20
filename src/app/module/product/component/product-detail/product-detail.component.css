@@ -55,7 +55,7 @@
 
 .carousel-container {
   width: 50%;
-  height: 70%;
+  height: 75%;
 
   & .carousel {
     height: 100%;
@@ -66,11 +66,18 @@
   & .carousel-inner {
     padding: 1rem;
   }
+  & .image{
+    display: inline-block;
+    height: 450px;
+    width: 550px;
+  }
+
+  
 }
 
 .product-info-container {
   width: 50%;
-  height: 70%;
+  height: 75%;
   padding: 1.5rem;
 }
 
@@ -168,4 +175,15 @@ input[type="file"] {
   & .admin-button {
     width: 40%;
   }
+}
+
+.button-show-more{
+  color: #8b5ee4;
+  text-decoration: underline;
+  cursor: pointer;
+
+}
+
+.paragraph{
+  font-size: 1rem;
 }
