@@ -6,6 +6,7 @@
 
 .btn {
     background-color: #554b83;
+    width: 100%;
   }
 
 .btn-back {
@@ -31,6 +32,7 @@
     max-width: 1280px;
     margin: auto;
     width: 100%;
+    
 }
 
 .card-header {
@@ -101,6 +103,7 @@
 
 .size-body {
     height: fit-content;
+    min-width: 1000px;
 }
 
 /* ul dropdown  */
@@ -169,4 +172,45 @@
 
 .td-status-disable {
     background-color: #e74c3c;
+}
+
+.red{
+    color: red;
+    cursor: pointer;
+}
+
+.red:hover{
+    color: rgb(204, 13, 13);
+}
+
+.img-cart{
+    height: 100px;
+}
+
+.delete{
+    display: inline;
+}
+
+label{
+    font-weight: bold;
+}
+
+.modal-size{
+    width: 100%;
+    max-width: 1000px;
+    min-width: 1000px;
+}
+
+.user-info{
+    border-color: #bbb8b8;
+}
+
+.summary-info-user{
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    &.summary-info-user > p {
+        margin: 0;
+    }
 }

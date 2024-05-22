@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SwalMessages } from '../../../commons/_dto/swal-message';
 import { ProductService } from '../../_service/product.service';
@@ -10,24 +10,33 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ProductImageService } from '../../_service/product-image.service';
 import { ProductImage } from '../../_model/product-image';
 import { NgxPhotoEditorService } from 'ngx-photo-editor';
+import { CartService } from '../../../invoice/_service/cart.service';
+import { Location } from '@angular/common';
+import { forkJoin } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 declare var $: any; // JQuery
 
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrl: './product.component.css'
+  selector: 'app-product2',
+  templateUrl: './product2.component.html',
+  styleUrl: './product2.component.css'
 })
-export class ProductComponent {
+export class Product2Component {
+
+  isAdmin: boolean = false;
 
   products: DtoProductList[] = []; // product list
   productToUpdate: number = 0; // product id to update
   productImages: ProductImage[] = []; // product images
   product_id: number = 0;
 
+  categoryShowing: string="";
+
   categories: Category[] = []; // category list
-  isAdmin: boolean = false; // isAdmin
-  loggedIn: boolean = false; // is logged in
+
+  loaded: boolean = false;
+  count: number = 0;
 
   // Product form
   form = this.formBuilder.group({
@@ -50,28 +59,60 @@ export class ProductComponent {
     private router: Router,
     private route: ActivatedRoute,
     private productImageService: ProductImageService,
-    private ngxService: NgxPhotoEditorService
+    private ngxService: NgxPhotoEditorService,
+    private cartService: CartService,
+    private location: Location
   ) { }
 
   ngOnInit() {
-    if (localStorage.getItem('token')) {
-      this.loggedIn = true;
-    }else{
-      this.router.navigate(['/']);
-    }
-
     if (localStorage.getItem('user')) {
       let user = JSON.parse(localStorage.getItem('user')!);
       if (user.rol == 'ADMIN') {
         this.isAdmin = true;
       } else {
-        this.router.navigate(['/']);
         this.isAdmin = false;
       }
-      console.log(this.isAdmin);
     }
-    this.getProducts();
-    this.getActiveCategories();
+    this.route.params.subscribe(params => {
+      if(params['categoryId']){
+        const categoryId = params['categoryId'];
+        this.getProductsByCategory(categoryId);
+        console.log(this.products);
+        this.loaded = true;
+      }else{
+        this.getProducts();
+        this.getActiveCategories();
+      }
+
+      if(params['category']){
+        this.categoryShowing = params['category'];
+      }
+  })
+    
+  }
+
+  getImages() {
+    let arr: DtoProductList[] = [];
+    let observables = this.products.map(product => 
+      this.productImageService.getProductImages(product.product_id).pipe(
+        map(v => (arr.push ({
+          ...product,
+          image: v.body?.at(0)?.image ?? ""
+        })))
+      )
+    );
+  
+    forkJoin(observables).subscribe({
+      next: (results) => {
+        this.products = arr;
+        console.log(arr);
+        this.loaded = true;
+      },
+      error: (e) => {
+        console.log(e);
+        this.swal.errorMessage(e.error!.message); // show message
+      }
+    });
   }
 
   disableProduct(id: number) {
@@ -85,7 +126,7 @@ export class ProductComponent {
       if (result.isConfirmed) {
         this.productService.disableProduct(id).subscribe({
           next: (v) => {
-            this.swal.successMessage("Product successfully desabled"); // show message
+            this.swal.successMessage("Product successfully disabled"); // show message
             this.getProducts(); // reload products
           },
           error: (e) => {
@@ -133,7 +174,21 @@ export class ProductComponent {
   }
 
   getProducts() {
-    this.productService.getProducts().subscribe({
+    this.productService.getActiveProducts().subscribe({
+      next: (v) => {
+        this.products = v.body!;
+        console.log(this.products);
+        this.getImages();
+      },
+      error: (e) => {
+        console.log(e);
+        this.swal.errorMessage(e.error!.message); // show message
+      }
+    });
+  }
+
+  getProductsByCategory(categoryId: number){
+    this.productService.getProductsByCategory(categoryId).subscribe({
       next: (v) => {
         this.products = v.body!;
       },
@@ -142,6 +197,7 @@ export class ProductComponent {
         this.swal.errorMessage(e.error!.message); // show message
       }
     });
+  
   }
 
   getProductImages(product_id: number) {
@@ -202,6 +258,7 @@ export class ProductComponent {
   showDetail(gtin: string) {
     //redirect to product detail
     // this.router.navigate(['/product/detail'], { queryParams: { gtin: gtin } });
+    console.log(gtin);
     this.router.navigate([`product/${gtin}`]);
   }
 
@@ -218,7 +275,6 @@ export class ProductComponent {
 
         this.form.controls['product'].setValue(product.product);
         this.form.controls['gtin'].setValue(product.gtin);
-        // this.form.controls['gtin'].disable();
         this.form.controls['price'].setValue(product.price);
         this.form.controls['stock'].setValue(product.stock);
         this.form.controls['category_id'].setValue(product.category_id);
@@ -297,26 +353,25 @@ export class ProductComponent {
     });
   }
 
-  deleteProductImage(image_id: number, product_id: number) {
-    this.swal.confirmMessage.fire({
-      title: 'Please confirm the image deletion',
-      icon: 'warning',
-      showCancelButton: true,
-      cancelButtonText: 'Cancel',
-      confirmButtonText: 'Confirm',
-    }).then((result: any) => {
-      if (result.isConfirmed) {
-        this.productImageService.deleteProductImage(image_id).subscribe({
-          next: (v) => {
-            this.swal.successMessage("Image deleted"); // show message
-            this.getProductImages(product_id); // reload images
-          },
-          error: (e) => {
-            console.error(e);
-            this.swal.errorMessage(e.error!.message); // show message
-          }
-        });
+  addToCart(gtin: string) {
+    let cart = {
+      gtin: gtin,
+      quantity: 1
+    }
+
+    this.cartService.addToCart(cart).subscribe({
+      next: (v) => {  
+        this.swal.successMessage("Product added to cart");
+        this.cartService.getCount();
+      },
+      error: (e) => {
+        this.swal.errorMessage(e.error!.message);
       }
     });
+
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

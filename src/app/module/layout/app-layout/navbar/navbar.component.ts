@@ -3,6 +3,8 @@ import { Category } from '../../../product/_model/category';
 import { SwalMessages } from '../../../commons/_dto/swal-message';
 import { CategoryService } from '../../../product/_service/category.service';
 import { AuthenticationService } from '../../../authentication/_service/authentication.service';
+import { CartService } from '../../../invoice/_service/cart.service';
+import { Router } from '@angular/router';
 
 declare var $: any;
 
@@ -13,15 +15,19 @@ declare var $: any;
 })
 export class NavbarComponent {
   categories: Category[] = [];
-
+  
   loggedIn: boolean = false;
   isAdmin: boolean = false;
 
   swal: SwalMessages = new SwalMessages();
 
+  cartQuantity: number = 0;
+
   constructor(
     private categoryService: CategoryService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private cartService: CartService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -36,11 +42,34 @@ export class NavbarComponent {
         this.isAdmin = true;
       } else {
         this.isAdmin = false;
+        this.getCartQuantity();
+
       }
       console.log(this.isAdmin);
     }
 
     this.getCategories();
+
+    this.categoryService.getCategoriasObservable().subscribe({
+      next: (v) => {
+        this.categories = v;
+      },
+      error: (e) => {
+        console.log(e);
+      }
+    
+    })
+
+    this.cartService.getCountObservable().subscribe({
+      next: (v) => {
+        console.log(v)
+        this.cartQuantity = v;
+        console.log(this.cartQuantity);
+      },
+      error: (e) => {
+        console.error(e);
+      }
+    })
   }
 
   getCategories() {
@@ -69,6 +98,33 @@ export class NavbarComponent {
     $("#registerModal").modal("show");
   }
 
+  closeRegistrationModal() {
+    $("#registerModal").modal("hide");
+  
+  }
+
+  handleRegistrationSuccess(event: boolean) {
+    if (event) {
+      // Si el registro es exitoso, cierra el modal
+      this.closeRegistrationModal();
+    }
+  }
+
+  getCartQuantity(){
+    this.cartService.getCart().subscribe({
+      next: (v) => {
+        this.cartQuantity = v.body!.reduce((acumulador, cart) => acumulador + cart.quantity, 0);
+      },
+      error: (e) => {
+        console.error(e);
+      }
+    });
+  }
+
+  goToCart(){
+    this.router.navigate(['/cart']);
+  }
+  
 
 
 }

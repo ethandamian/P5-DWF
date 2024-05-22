@@ -1,0 +1,85 @@
+<div class="main-cointainer">
+    <section class="pb-5 buttons-section">
+        <button class="btn btn-back" (click)="goBack()">
+            <i class="ph ph-arrow-left"></i>
+            <span> Go back</span>
+        </button>
+        <button class="btn download-button" (click)="goBack()">
+            <i class="ph ph-download-simple"></i>
+            <span>Download in PDF format</span>
+        </button>
+    </section>
+
+
+    <div class="card invoice-details-container">
+        <div class="invoice-details">
+            <header class="invoice-details-header">
+                <h2>Mangaworld S.A de C.V</h2>
+                <h4>RFC: {{invoiceDetails.rfc}}</h4>
+            </header>
+            <div class="reciever-info">
+
+                <section class="invoice-details-info invoice-details-sec-1">
+                    <div>
+                        <h3>Invoice</h3>
+                        <h5>Address and place of Dispatch:</h5>
+                        <p>Ciudad Universitaria</p>
+                        <p>Del. Coyoacan CP. 5676</p>
+                        <p>Ciudad de México</p>
+
+                    </div>
+                    <div>
+                        <p><strong>Place of dispatch: </strong> CIUDAD DE MÉXICO</p>
+                        <strong style="color:blueviolet; ">Reciever Data</strong>
+                        <p><strong>Client: </strong>CLIENT{{invoiceDetails.invoice_id}}</p>
+                        <p><strong>RFC: </strong> {{invoiceDetails.rfc}}</p>
+                    </div>
+
+                </section>
+                <section class="invoice-details-info invoice-details-sec-2">
+                    <img src="../../../../../assets/images/manga-world-logo.png" alt="manga-world-logo" class="logo">
+                    <p><Strong>Online Invoice</Strong></p>
+                    <p>Fiscal invoice: {{folio}}</p>
+                    <p>Voucher number: I-GI0{{invoiceDetails.invoice_id}}</p>
+                    <p><strong style="color: blueviolet;">Payment Method: </strong>ONE EXHIBITION</p>
+                    <p>Date of issue: {{ invoiceDetails.created_at }}</p>
+                    <p>Time of issue: {{invoiceDetails.created_at}}</p>
+                    <p><strong style="color: blueviolet;">Fiscal regimen: </strong> General of moral persons</p>
+                    <p>CFDI use: General expenses</p>
+                    <p></p>
+                </section>
+            </div>
+            <section class="invoice-details-info invoice-details-sec-3">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="col">Id</th>
+                            <th scope="col" class="col">GTIN</th>
+                            <th scope="col" class="col">Quantity</th>
+                            <th scope="col" class="col">Unit Price</th>
+                            <th scope="col" class="col">Taxes</th>
+                            <th scope="col" class="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for(item of invoiceDetails.items; track item; let i = $index ) {
+                        <tr class="bg-body-tertiary">
+                            <th scope="row" class="row-item">{{item.item_id}}</th>
+                            <td class="row-item">{{item.gtin}}</td>
+                            <td class="row-item">{{item.quantity}}</td>
+                            <td class="row-item">{{item.unit_price}}</td>
+                            <td class="row-item">{{item.taxes}}</td>
+                            <td class="row-item">{{item.total}}</td>
+                        </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </section>
+            <section class="invoice-details-info invoice-details-sec-4"></section>
+
+        </div>
+
+    </div>
+
+</div>

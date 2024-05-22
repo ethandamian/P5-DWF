@@ -7,6 +7,12 @@ import { Category } from '../../_model/category';
 import { ProductComponent } from '../product/product.component';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SwalMessages } from '../../../commons/_dto/swal-message';
+import { Location } from '@angular/common';
+import { ProductImage } from '../../_model/product-image';
+import { Cart } from '../../../invoice/_model/cart';
+import { CartService } from '../../../invoice/_service/cart.service';
+import { ProductImageService } from '../../_service/product-image.service';
+import { NgxPhotoEditorService } from 'ngx-photo-editor';
 
 declare var $: any;
 
@@ -17,6 +23,8 @@ declare var $: any;
 })
 export class ProductDetailComponent {
 
+
+
   gtin = '0';
   product: any = {};
   category: any = {};
@@ -24,13 +32,25 @@ export class ProductDetailComponent {
   submitted = false;
   swal: SwalMessages = new SwalMessages();
   id = 0;
+  productImages: ProductImage[] = []; // product images
+  loggedIn: boolean = false;
+  isAdmin: boolean = false;
+  productQuantity: number = 1;
+
+  mostrarDescripcionCompleta: boolean = false;
+  limiteCaracteres: number = 300; // Establece el límite de caracteres deseado
+
 
   constructor(
     private rutaActiva: ActivatedRoute,
     private productService: ProductService,
     private categoryService: CategoryService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private location: Location,
+    private cartService: CartService,
+    private imageService: ProductImageService,
+    private ngxService: NgxPhotoEditorService
   ) { }
 
   form = this.formBuilder.group({
@@ -48,6 +68,7 @@ export class ProductDetailComponent {
     this.product = this.productService.getProduct(this.gtin).subscribe({
       next: (v) => {
         this.product = v.body;
+        this.getProductImages(this.product.product_id);
         this.category = this.categoryService.getCategory(this.product.category_id).subscribe({
           next: (v) => {
             this.category = v.body?.category;
@@ -75,6 +96,33 @@ export class ProductDetailComponent {
         });
       }
 
+    })
+
+    if (localStorage.getItem('token')) {
+      this.loggedIn = true;
+    }
+    if (localStorage.getItem('user')) {
+      let user = JSON.parse(localStorage.getItem('user')!);
+      if (user.rol == 'ADMIN') {
+        this.isAdmin = true;
+      } else {
+        this.isAdmin = false;
+      }
+      console.log(this.isAdmin);
+    }
+
+  }
+
+
+  getProductImages(product_id: number) {
+    this.imageService.getProductImages(product_id).subscribe({
+      next: (v) => {
+        this.productImages = v.body!;
+        console.log(this.productImages)
+      },
+      error: (e) => {
+        console.log(e);
+      }
     })
   }
 
@@ -150,6 +198,93 @@ export class ProductDetailComponent {
   }
 
   goBack() {
-    this.router.navigate(['/product']);
+    this.location.back();
+  }
+
+  quantityUp() {
+    this.productQuantity++;
+  }
+
+  quantityDown() {
+    if (this.productQuantity > 1) {
+      this.productQuantity--;
+    }
+  }
+
+  addToCart() {
+    let cart = {
+      gtin: this.gtin,
+      quantity: this.productQuantity
+    }
+
+    this.cartService.addToCart(cart).subscribe({
+      next: (v) => {
+        let text = this.productQuantity > 1 ? "Products added to cart" : "Product added to cart";
+        this.swal.successMessage(text);
+        this.cartService.getCount();
+      },
+      error: (e) => {
+        this.swal.errorMessage(e.error!.message);
+      }
+    });
+
+  }
+
+  newImage($event: any) {
+    this.ngxService.open($event, {
+      aspectRatio: 4 / 3,
+      autoCropArea: 1
+    }).subscribe((data) => {
+      console.log(data.base64)
+      this.createProductImage(data.base64!);
+    })
+  }
+
+  createProductImage(image: string) {
+    let productImage = new ProductImage();
+    productImage.product_id = this.product.product_id;
+    productImage.image = image;
+    this.imageService.createProductImage(productImage).subscribe({
+      next: (v) => {
+        this.swal.successMessage("Image created"); // show message
+        this.getProductImages(this.product.product_id); // reload images
+      },
+      error: (e) => {
+        console.error(e);
+        this.swal.errorMessage(e.error!.message); // show message
+      }
+    });
+  }
+
+  showImageModal() {
+    this.getProductImages(this.product.product_id)
+    $("#modalImages").modal("show");
+  }
+
+  deleteImage(id_image: number) {
+
+    this.swal.confirmMessage.fire({
+      title: 'Please confirm you want to delete the image',
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonText: 'Cancel',
+      confirmButtonText: 'Confirm',
+      background: "#505050",
+      color: "white",
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+        this.imageService.deleteProductImage(id_image).subscribe({
+          next: (v) => {
+            this.swal.successMessage("The caregory has been disabled"); // show message
+            this.imageService.getProductImages(this.product.product_id);
+            this.getProductImages(this.product.product_id);
+          },
+          error: (e) => {
+            console.error(e);
+            this.swal.errorMessage("Can't delete the image"); // show message
+          }
+        });
+      }
+    });
   }
 }

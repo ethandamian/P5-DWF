@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CategoryService } from '../../_service/category.service';
 import { Category } from '../../_model/category';
 import { FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { SwalMessages } from '../../../commons/_dto/swal-message';
+import { Location } from '@angular/common';
 
 declare var $: any;
 
@@ -19,6 +21,8 @@ export class CategoryComponent {
   categories: Category[] = [];
 
   categoryToUpdate: number = 0;
+  loggedIn: boolean = false;
+  isAdmin: boolean = false;
 
 
   form = this.formBuilder.group({
@@ -32,12 +36,33 @@ export class CategoryComponent {
 
   swal: SwalMessages = new SwalMessages();
 
-  constructor(private categoryService: CategoryService, private formBuilder: FormBuilder) {
+  constructor(
+    private categoryService: CategoryService, 
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private location: Location
+  ) {
 
 
   }
 
   ngOnInit() {
+    if (localStorage.getItem('token')) {
+      this.loggedIn = true;
+    }else{
+      this.router.navigate(['/']);
+    }
+
+    if (localStorage.getItem('user')) {
+      let user = JSON.parse(localStorage.getItem('user')!);
+      if (user.rol == 'ADMIN') {
+        this.isAdmin = true;
+      } else {
+        this.router.navigate(['/']);
+        this.isAdmin = false;
+      }
+      console.log(this.isAdmin);
+    }
     this.getCategories();
   }
 
@@ -48,11 +73,14 @@ export class CategoryComponent {
       showCancelButton: true,
       cancelButtonText: 'Cancel',
       confirmButtonText: 'Confirm',
+      background: "#505050",
+      color: "white"
     }).then((result: any) => {
       if (result.isConfirmed) {
         this.categoryService.disableCategory(id).subscribe({
           next: (v) => {
             this.swal.successMessage("The caregory has been disabled"); // show message
+            this.categoryService.fetchCategories();
             this.getCategories(); // reload regions
           },
           error: (e) => {
@@ -78,6 +106,7 @@ export class CategoryComponent {
         this.categoryService.enableCategory(id).subscribe({
           next: (v) => {
             this.swal.successMessage(v.body!.message); // show message
+            this.categoryService.fetchCategories();
             this.getCategories(); // reload regions
           },
           error: (e) => {
@@ -109,10 +138,6 @@ export class CategoryComponent {
 
   }
 
-
-
-
-
   onSubmit() {
     this.submitted = true;
     if (this.form.invalid) return;
@@ -129,6 +154,7 @@ export class CategoryComponent {
     this.categoryService.createCategory(this.form.value).subscribe({
       next: (v) => {
         this.swal.successMessage("The category has been added successfully!"); // show message
+        this.categoryService.fetchCategories();
         this.getCategories(); // reload regions
         this.hideModal(); // close modal
       },
@@ -143,8 +169,9 @@ export class CategoryComponent {
     this.categoryService.updateCategory(this.form.value, this.categoryToUpdate).subscribe({
       next: (v) => {
         this.swal.successMessage("The categody has been updated succesfully!"); // show message
+        this.categoryService.fetchCategories();
         this.getCategories(); // reload regions
-        this.hideModal(); // close modal
+        this.hideModal(); // close modalthis.htt
         this.categoryToUpdate = 0; // reset regionToUpdate
       },
       error: (e) => {
@@ -194,6 +221,10 @@ export class CategoryComponent {
 
   hideModal() {
     $('#categoryFormModal').modal("hide");
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 

@@ -1,0 +1,69 @@
+.band {
+  height: 500px;
+  /*Center vertically*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../../assets/images/home-image.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.product-img {
+  cursor: pointer;
+}
+
+.slogan {
+  font-size: 2rem;
+  padding-top: 50px;
+  margin-top: 50px;
+}
+
+.see-more {
+  background-color: #a364ff;
+  padding: 10px;
+  width: 150px;
+}
+
+.see-more:hover {
+  background-color: #664feb;
+}
+
+.boton {
+  padding-bottom: 20px;
+  margin: 20px;
+}
+
+.cont-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer {
+  margin-top: 18%;
+}
+
+.card {
+  padding: 1rem;
+}
+
+.btn.btn-cart {
+  background-color: #5e3fb4;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.75rem;
+  position: relative;
+}
+
+.btn.btn-cart:hover {
+  background-color: #4a2e8a;
+}
+
+.ph-shopping-bag {
+  position: absolute;
+  left: 1.5rem;
+  top: 0.68rem;
+}

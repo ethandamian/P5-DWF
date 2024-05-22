@@ -1,0 +1,72 @@
+.card {
+  padding: 1rem;
+  margin-top: 20px;
+  max-width: 1280px;
+  margin: auto;
+  width: 100%;
+}
+
+.product-images-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* Dos columnas de tamaño igual */
+  grid-gap: 20px;
+  /* Espacio entre las imágenes */
+}
+
+.product-img {
+  cursor: pointer;
+}
+
+.line {
+  border: 1px solid #fff;
+  border-radius: 10%;
+}
+
+.line:hover {
+  background-color: #4c4a4a;
+}
+
+.btn {
+  background-color: #5e3fb4;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.75rem;
+  position: relative;
+}
+
+.btn:hover {
+  background-color: #4a2e8a;
+}
+
+.ph-shopping-bag {
+  position: absolute;
+  left: 1.5rem;
+  top: 0.68rem;
+}
+
+.align-button {
+  /*position: absolute;
+  right: 20%;*/
+  position: fixed;
+  top: 170px;
+  right: 0;
+  margin-right: 10%;
+}
+
+.btn-back {
+  position: absolute;
+  top: 170px;
+  left: 10%;
+  background-color:#685c9e;
+}
+
+.footer {
+  position:absolute;
+  bottom: 0;
+  top: 105%;
+  width: 100%;
+  margin-top: 0;
+}
+

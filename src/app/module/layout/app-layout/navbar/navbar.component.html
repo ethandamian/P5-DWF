@@ -14,7 +14,7 @@
                         aria-expanded="false">Categories</a>
                     <div class="dropdown-menu nav-dropdown-menu">
                         @for(category of categories; track category){
-                        <a class="dropdown-item nav-dropdown-item" routerLink="#">{{ category.category }}</a>
+                        <a class="dropdown-item nav-dropdown-item" [routerLink]="['/product', category.category_id, category.category]">{{ category.category }}</a>
                         }
                     </div>
                 </li>
@@ -40,7 +40,13 @@
 
             @if(loggedIn){
             <a class="nav-link" routerLink="#" role="button">
-                <i class="ph ph-shopping-bag"></i>
+                @if(!isAdmin){
+                    <i class="ph ph-shopping-bag" (click)="goToCart()"></i>
+                    @if(cartQuantity > 0){
+                        <span class="badge">{{cartQuantity}}</span>
+
+                    }
+                }
             </a>
             }@else{
             <ul class="navbar-nav">
@@ -112,7 +118,7 @@
 
                 <!-- Register component  -->
 
-                <app-register></app-register>
+                <app-register (registerEvent)="handleRegistrationSuccess($event)"></app-register>
 
             </div>
         </div>
