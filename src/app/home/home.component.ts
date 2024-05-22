@@ -30,7 +30,7 @@ export class HomeComponent {
     private productService: ProductService,
     private productImageService: ProductImageService,
     private cartService: CartService
-  ) {}
+  ) { }
 
   ngOnInit() {
     if (localStorage.getItem('token')) {
@@ -54,7 +54,7 @@ export class HomeComponent {
     this.productService.getActiveProducts().subscribe({
       next: (v) => {
         this.products = v.body!;
-        this.products = this.products.slice(0,8);
+        this.products = this.products.slice(0, 8);
         this.getImages();
       },
       error: (e) => {
@@ -66,15 +66,15 @@ export class HomeComponent {
 
   getImages() {
     let arr: DtoProductList[] = [];
-    let observables = this.products.map(product => 
+    let observables = this.products.map(product =>
       this.productImageService.getProductImages(product.product_id).pipe(
-        map(v => (arr.push ({
+        map(v => (arr.push({
           ...product,
           image: v.body?.at(0)?.image ?? ""
         })))
       )
     );
-  
+
     forkJoin(observables).subscribe({
       next: (results) => {
         this.products = arr;
@@ -86,23 +86,11 @@ export class HomeComponent {
     });
   }
 
-  /*getProducts() {
-    this.productService.getProductsByCategory(3).subscribe({
-      next: (v) => {
-        this.products = v.body!;
-        console.log(this.products);
-        // Get the images of the products
-      },
-      error: (e) => {
-        console.log(e);
-        this.swal.errorMessage(e.error!.message); // show message
-      }
-    });
-  }*/
 
-  
 
-  seeMore(){
+
+
+  seeMore() {
     this.router.navigate(['/product'])
   }
 
@@ -111,20 +99,26 @@ export class HomeComponent {
   }
 
   addToCart(gtin: string) {
-    let cart = {
-      gtin: gtin,
-      quantity: 1
+    if (!this.loggedIn) {
+      this.swal.warningMessage("You must be logged in to add products to the cart");
+    } else {
+
+      let cart = {
+        gtin: gtin,
+        quantity: 1
+      }
+
+      this.cartService.addToCart(cart).subscribe({
+        next: (v) => {
+          this.swal.successMessage("Product added to cart");
+          this.cartService.getCount();
+        },
+        error: (e) => {
+          this.swal.errorMessage(e.error!.message);
+        }
+      });
     }
 
-    this.cartService.addToCart(cart).subscribe({
-      next: (v) => {  
-        this.swal.successMessage("Product added to cart");
-        this.cartService.getCount();
-      },
-      error: (e) => {
-        this.swal.errorMessage(e.error!.message);
-      }
-    });
 
   }
 }

@@ -12,7 +12,7 @@ import { AuthenticationModule } from '../authentication/authentication.module';
 @NgModule({
   declarations: [
     AppLayoutComponent,
-    NavbarComponent
+    NavbarComponent,
   ],
   imports: [
     CommonModule,

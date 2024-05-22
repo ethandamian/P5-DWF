@@ -1,4 +1,4 @@
-
+/* 
 /* You can add global styles to this file, and also import other style files */
 @charset "UTF-8";
 /*!
@@ -135,6 +135,8 @@
     --bs-form-invalid-color: #e74c3c;
     --bs-form-invalid-border-color: #e74c3c;
 }
+
+
 
 [data-bs-theme=dark] {
     color-scheme: dark;

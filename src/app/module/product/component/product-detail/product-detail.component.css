@@ -187,3 +187,20 @@ input[type="file"] {
 .paragraph{
   font-size: 1rem;
 }
+
+.card.product-image {
+  padding: 1rem;
+  border-color: rgb(190, 185, 185);
+}
+
+.product-images-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* Dos columnas de tamaño igual */
+  grid-gap: 20px;
+  /* Espacio entre las imágenes */
+}
+
+.ph-trash {
+  cursor: pointer;
+}
