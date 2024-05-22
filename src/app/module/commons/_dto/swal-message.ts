@@ -24,7 +24,7 @@ export class SwalMessages {
             toast: true,
             text: message,
             showConfirmButton: false,
-            timer: 2000,
+            timer: 4000,
             background: '#4d425f',
             color: 'white'
         });
@@ -37,9 +37,23 @@ export class SwalMessages {
             icon: 'error',
             toast: true,
             text: message,
-            background: '#F8E8F8',
+            background: '#4d425f',
+            color: 'white',
             showConfirmButton: false,
-            timer: 2000
+            timer: 4000
+        });
+    }
+
+    warningMessage(message: string) {
+        Swal.fire({
+            position: 'top-end',
+            icon: 'warning',
+            toast: true,
+            text: message,
+            background: '#4d425f',
+            color: 'white',
+            showConfirmButton: false,
+            timer: 4000
         });
     }
 }

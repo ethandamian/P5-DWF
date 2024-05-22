@@ -282,8 +282,11 @@
           <div *ngIf="productImages.length > 0; else noImages">
             <div class="product-images-container">
               @for(image of productImages; track image){
-              <img [src]="image.image" alt="Product Image" class="img-fluid product-img" style="margin-bottom: 10px;">
+              <div class="card product-image">
+                <img [src]="image.image" alt="Product Image" class="img-fluid product-img" style="margin-bottom: 10px;">
+                <i class="ph ph-trash" (click)="deleteImage(image.product_image_id)"></i>
 
+              </div>
               }
             </div>
 

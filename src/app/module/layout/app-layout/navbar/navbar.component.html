@@ -14,7 +14,9 @@
                         aria-expanded="false">Categories</a>
                     <div class="dropdown-menu nav-dropdown-menu">
                         @for(category of categories; track category){
-                        <a class="dropdown-item nav-dropdown-item" [routerLink]="['/product', category.category_id, category.category]">{{ category.category }}</a>
+                        <a class="dropdown-item nav-dropdown-item"
+                            [routerLink]="['/product', category.category_id, category.category]">{{ category.category
+                            }}</a>
                         }
                     </div>
                 </li>
@@ -28,6 +30,7 @@
                         <a class="dropdown-item nav-dropdown-item" routerLink="#">Users</a>
                         <a class="dropdown-item nav-dropdown-item" routerLink="/product">Products</a>
                         <a class="dropdown-item nav-dropdown-item" routerLink="#">Regions</a>
+                        <a class="dropdown-item nav-dropdown-item" routerLink="/invoice">Invoices</a>
                     </div>
                 </li>
                 }
@@ -41,11 +44,11 @@
             @if(loggedIn){
             <a class="nav-link" routerLink="#" role="button">
                 @if(!isAdmin){
-                    <i class="ph ph-shopping-bag" (click)="goToCart()"></i>
-                    @if(cartQuantity > 0){
-                        <span class="badge">{{cartQuantity}}</span>
+                <i class="ph ph-shopping-bag" (click)="goToCart()"></i>
+                @if(cartQuantity > 0){
+                <span class="badge">{{cartQuantity}}</span>
 
-                    }
+                }
                 }
             </a>
             }@else{

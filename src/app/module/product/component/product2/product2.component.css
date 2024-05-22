@@ -47,9 +47,7 @@
 }
 
 .align-button {
-  /*position: absolute;
-  right: 20%;*/
-  position: fixed;
+  position: absolute;
   top: 170px;
   right: 0;
   margin-right: 10%;
