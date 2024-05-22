@@ -6,6 +6,7 @@
 
 .btn {
     background-color: #554b83;
+    width: 100%;
   }
 
 .btn-back {
@@ -31,6 +32,7 @@
     max-width: 1280px;
     margin: auto;
     width: 100%;
+    
 }
 
 .card-header {
@@ -197,4 +199,18 @@ label{
     width: 100%;
     max-width: 1000px;
     min-width: 1000px;
+}
+
+.user-info{
+    border-color: #bbb8b8;
+}
+
+.summary-info-user{
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    &.summary-info-user > p {
+        margin: 0;
+    }
 }

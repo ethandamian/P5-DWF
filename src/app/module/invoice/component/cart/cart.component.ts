@@ -69,7 +69,7 @@ export class CartComponent {
         });
       }
     });
-    
+
   }
 
   removeFromCart(id: number) {
@@ -97,9 +97,9 @@ export class CartComponent {
     });
   }
 
-  total(): number{
+  total(): number {
     let total = 0;
-    for(let element of this.cart){
+    for (let element of this.cart) {
       total += element.product.price! * element.quantity!;
     }
     return total;
@@ -107,19 +107,17 @@ export class CartComponent {
 
   showModal() {
     $('#checkoutModal').modal("show");
-    $("#checkout-form-title").text("New Category");
-    $("#modal-button").text("Add");
   }
 
-  totalProducts(){
+  totalProducts() {
     let total = 0;
-    for(let element of this.cart){
+    for (let element of this.cart) {
       total += element.quantity!;
     }
     return total;
   }
 
-  finish(){
+  finish() {
     this.swal.confirmMessage.fire({
       title: 'Are you sure to complete the purchase?',
       icon: 'question',

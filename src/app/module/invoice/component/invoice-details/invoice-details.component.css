@@ -1,0 +1,120 @@
+.main-cointainer{
+    position: relative;
+    padding: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+.buttons-section{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    
+}
+
+.invoice-details-container{
+    width: 1250px;
+    min-height: 1160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+
+    & .invoice-details{
+        background-color: white;
+        width: 890px;
+        min-height: 1155px;
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+        
+    }
+
+    & .invoice-details-header{
+        text-align: center;
+        color: black;
+    }
+    & .invoice-details-header > h2, h4{
+        font-weight: bold;
+    }
+
+    & .reciever-info{
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    &.invoice-details-info > h3,h5,p, strong{
+        color: black;
+    }
+    
+    & .invoice-details-info > h3,h5{
+
+        font-weight: 600;
+    }
+
+    & .invoice-details-info > p{
+
+        margin-bottom: 0.075rem;
+    }
+
+    & .invoice-details-sec-1{
+        display: flex;
+        flex-direction: column;
+        gap: 1.7rem;
+
+
+        &.invoice-details-sec-1 > div > p{
+            margin-bottom: 0.075rem;
+        }
+    }
+
+    & .invoice-details-sec-2{
+
+        & .logo{
+            width: 300px;
+            height: 300px;
+        }
+
+    }
+
+    & .invoice-details-sec-3{
+        
+    }
+    
+    & .invoice-details-sec-4{
+        
+    }
+}
+
+.btn {
+    background-color: #554b83;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.download-button{
+    background-color: transparent;
+    font-size: 1.075rem;
+    
+}
+
+.download-button:hover{
+    scale: 1.05;
+}
+.download-button:hover > span{
+    text-decoration: underline;
+}
+
+.col{
+    background-color: rgb(189, 176, 224);
+    color: rgb(53, 52, 54);
+}
+.row-item{
+    background-color: rgb(248, 248, 248);
+    color: black;
+}
