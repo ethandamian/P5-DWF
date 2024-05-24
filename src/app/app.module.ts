@@ -14,12 +14,14 @@ import { CommonsModule } from './module/commons/commons.module';
 import { NavbarComponent } from './module/layout/app-layout/navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { CartComponent } from './module/invoice/component/cart/cart.component';
+import { InvoiceDetailsComponent } from './module/invoice/component/invoice-details/invoice-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    CartComponent
+    CartComponent,
+    InvoiceDetailsComponent
   ],
   imports: [
     BrowserModule,

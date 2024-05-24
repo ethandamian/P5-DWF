@@ -4,15 +4,15 @@
             <i class="ph ph-arrow-left"></i>
             <span> Go back</span>
         </button>
-        <button class="btn download-button" (click)="goBack()">
+        <button class="btn download-button" (click)="generatePDF()">
             <i class="ph ph-download-simple"></i>
-            <span>Download in PDF format</span>
+            <span>Download as PDF</span>
         </button>
     </section>
 
 
     <div class="card invoice-details-container">
-        <div class="invoice-details">
+        <div class="invoice-details" id="invoice-details">
             <header class="invoice-details-header">
                 <h2>Mangaworld S.A de C.V</h2>
                 <h4>RFC: {{invoiceDetails.rfc}}</h4>
@@ -42,8 +42,8 @@
                     <p>Fiscal invoice: {{folio}}</p>
                     <p>Voucher number: I-GI0{{invoiceDetails.invoice_id}}</p>
                     <p><strong style="color: blueviolet;">Payment Method: </strong>ONE EXHIBITION</p>
-                    <p>Date of issue: {{ invoiceDetails.created_at }}</p>
-                    <p>Time of issue: {{invoiceDetails.created_at}}</p>
+                    <p>Date of issue: {{ invoiceDetails.created_at | date: 'mediumDate'}}</p>
+                    <p>Time of issue: {{invoiceDetails.created_at| date: 'shortTime'}}</p>
                     <p><strong style="color: blueviolet;">Fiscal regimen: </strong> General of moral persons</p>
                     <p>CFDI use: General expenses</p>
                     <p></p>
@@ -75,8 +75,37 @@
 
                     </tbody>
                 </table>
+                <div class="total-container">
+                    <p>Total {{getTotal() | currency}}</p>
+                </div>
             </section>
-            <section class="invoice-details-info invoice-details-sec-4"></section>
+            <section class="invoice-details-sec-4">
+                <div>
+
+                    <p>This document is a print representation of a CFDI</p>
+                    <div>
+                        <p class="important">Serial number of the
+                            certificate with
+                            original seal:</p>
+                        <p>334136258369892141391967907396</p>
+                        <p class="important">Serial number of the
+                            certificate with
+                            original issued by the SAT:</p>
+                        <p>970792075386641980542829800766</p>
+                    </div>
+                    <p class="important">Original string of the digital
+                        certificate issued by the SAT:</p>
+                    <p>9zYNBP9en-nKSWZghY]XK_Da8rRTvMGW-pxTdUd0JQhfN9LPqqPcg?0$5#U*DYgMi0d$KwX6h*XxDvGbwGZ*hjRJR&</p>
+                    <p class="important">Digital seal of the issuing company:</p>
+                    <p>RmUuDCHw[QZwHe_wmLqg81v7P$fuX]Q19&z=jJNyeJ1.tuH,F6MRd%2nG2AUp_</p>
+                    <p class="important">Digital seal issued by the SAT:</p>
+                    <p>#R0Nz9Ly423cd3h9[Gtw90cgy%LVL[B?8%q1HUN5BCncpN/c?S!:X*;Y=gy.]!z8HDp%2*//n8Gk$/ztQ=tYCrUV#VjN=iQiDb
+                    </p>
+                </div>
+                <div>
+                    <img src="../../../../../assets/images/qr.png" alt="qr-image" class="qr">
+                </div>
+            </section>
 
         </div>
 
