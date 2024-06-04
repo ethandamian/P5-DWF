@@ -160,7 +160,7 @@ export class ProductDetailComponent {
     console.log(this.form.value);
     this.productService.updateProduct(this.form.value, this.id).subscribe({
       next: (v) => {
-        this.swal.successMessage(v.body!.message); // show message
+        this.swal.successMessage("Product updated"); // show message
         this.getProduct(); // reload products
         this.hideModalForm(); // close modal
       },

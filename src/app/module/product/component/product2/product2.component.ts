@@ -31,7 +31,7 @@ export class Product2Component {
   productImages: ProductImage[] = []; // product images
   product_id: number = 0;
 
-  categoryShowing: string="";
+  categoryShowing: string = "";
 
   categories: Category[] = []; // category list
 
@@ -74,34 +74,34 @@ export class Product2Component {
       }
     }
     this.route.params.subscribe(params => {
-      if(params['categoryId']){
+      if (params['categoryId']) {
         const categoryId = params['categoryId'];
         this.getProductsByCategory(categoryId);
         console.log(this.products);
         this.loaded = true;
-      }else{
+      } else {
         this.getProducts();
         this.getActiveCategories();
       }
 
-      if(params['category']){
+      if (params['category']) {
         this.categoryShowing = params['category'];
       }
-  })
-    
+    })
+
   }
 
   getImages() {
     let arr: DtoProductList[] = [];
-    let observables = this.products.map(product => 
+    let observables = this.products.map(product =>
       this.productImageService.getProductImages(product.product_id).pipe(
-        map(v => (arr.push ({
+        map(v => (arr.push({
           ...product,
           image: v.body?.at(0)?.image ?? ""
         })))
       )
     );
-  
+
     forkJoin(observables).subscribe({
       next: (results) => {
         this.products = arr;
@@ -187,7 +187,7 @@ export class Product2Component {
     });
   }
 
-  getProductsByCategory(categoryId: number){
+  getProductsByCategory(categoryId: number) {
     this.productService.getProductsByCategory(categoryId).subscribe({
       next: (v) => {
         this.products = v.body!;
@@ -197,7 +197,7 @@ export class Product2Component {
         this.swal.errorMessage(e.error!.message); // show message
       }
     });
-  
+
   }
 
   getProductImages(product_id: number) {
@@ -229,7 +229,7 @@ export class Product2Component {
   onSubmitCreate() {
     this.productService.createProduct(this.form.value).subscribe({
       next: (v) => {
-        this.swal.successMessage(v.body!.message); // show message
+        this.swal.successMessage("Product created"); // show message
         this.getProducts(); // reload products
         this.hideModalForm(); // close modal
       },
@@ -243,7 +243,7 @@ export class Product2Component {
   onSubmitUpdate() {
     this.productService.updateProduct(this.form.value, this.productToUpdate).subscribe({
       next: (v) => {
-        this.swal.successMessage(v.body!.message); // show message
+        this.swal.successMessage("Product updated"); // show message
         this.getProducts(); // reload products
         this.hideModalForm(); // close modal
         this.productToUpdate = 0; // reset product to update
@@ -360,7 +360,7 @@ export class Product2Component {
     }
 
     this.cartService.addToCart(cart).subscribe({
-      next: (v) => {  
+      next: (v) => {
         this.swal.successMessage("Product added to cart");
         this.cartService.getCount();
       },
