@@ -56,7 +56,7 @@ export class ProductComponent {
   ngOnInit() {
     if (localStorage.getItem('token')) {
       this.loggedIn = true;
-    }else{
+    } else {
       this.router.navigate(['/']);
     }
 
@@ -187,7 +187,7 @@ export class ProductComponent {
   onSubmitUpdate() {
     this.productService.updateProduct(this.form.value, this.productToUpdate).subscribe({
       next: (v) => {
-        this.swal.successMessage(v.body!.message); // show message
+        this.swal.successMessage("The product has been register"); // show message
         this.getProducts(); // reload products
         this.hideModalForm(); // close modal
         this.productToUpdate = 0; // reset product to update

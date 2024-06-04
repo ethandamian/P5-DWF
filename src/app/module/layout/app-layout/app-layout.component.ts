@@ -6,10 +6,22 @@ import { Component } from '@angular/core';
   styleUrl: './app-layout.component.css'
 })
 export class AppLayoutComponent {
+  isAdmin: boolean = false;
   cart: boolean = false;
 
-  recieveCart(event: boolean){
-    if(event){
+  ngOnInit() {
+
+    if (localStorage.getItem('user')) {
+      let user = JSON.parse(localStorage.getItem('user')!);
+      if (user.rol == 'ADMIN') {
+        this.isAdmin = true;
+      }
+    }
+  }
+
+
+  recieveCart(event: boolean) {
+    if (event) {
       this.cart = true;
     }
   }

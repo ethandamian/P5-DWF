@@ -43,6 +43,7 @@
 
 .footer {
   margin-top: 18%;
+  position: static;
 }
 
 .card {
